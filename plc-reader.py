@@ -56,6 +56,7 @@ class PLCReader:
             hhmm_time = time.strftime('%H:%M:%S')
             unix_time = int(time.time())
             
+            print(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}')
             self._logger.info(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}')
         #####################################################
         
