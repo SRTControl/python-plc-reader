@@ -1,2 +1,6 @@
 data.json
 data.xml
+/rmq-reader/.vs
+/rmq-reader/bin
+/rmq-reader/obj
+/rmq-reader/packages
