@@ -91,6 +91,17 @@ namespace RMQReader
                     {
                         BeginInvoke(new Action(() =>
                         {
+                            #region COMMON
+                            textBoxTimeStamp.Text = UnixTimeStampToDateTime((double)data.TimeStamp).ToShortTimeString();
+                            textBoxPressure.Text = $"{data.Common.PressureReadings:F2}";
+                            textBoxAirTemperature.Text = $"{data.Common.AirTemperatureReadings:F2}";
+                            textBoxRainGauge.Text = $"{data.Common.RainGaugeReadings:F2}";
+                            cbDOMasterInOperation.Checked = (data.Common.IsDOmasterInOperation == 1);
+                            textBoxPH1.Text = $"{data.Common.pHReadings_1:F2}";
+                            textBoxPH2.Text = $"{data.Common.pHReadings_2:F2}";
+                            textBoxPH3.Text = $"{data.Common.pHReadings_3:F2}";                            
+                            #endregion
+
                             #region BLOWER 7
                             Blower7.VaneMR = $"{data.Blower7.VanePositionReadings:F2}";
                             Blower7.VaneSP = $"{data.Blower7.VanePositionSetPoint:F2}";
@@ -299,6 +310,14 @@ namespace RMQReader
                 buttonConnection.Text = "CONNECT";
             }
 #endif
+        }
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTime;
         }
     }
 }
