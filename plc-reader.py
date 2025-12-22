@@ -84,11 +84,11 @@ class PLCReader:
                     'VanePositionSetPoint': self._plc_state.get('Blower7.VanePositionSetPoint', 0)
                     },
                 'Blower8': {
-                    'InOperation': int(float(self._plc_state.get('Blower7.InOperation', 0))),
-                    'Power': self._plc_state.get('Blower7.Power', 0),
-                    'StartStopSignal': int(float(self._plc_state.get('Blower7.StartStopSignal', 0))),
-                    'VanePositionReadings': self._plc_state.get('Blower7.VanePositionReadings', 0),
-                    'VanePositionSetPoint': self._plc_state.get('Blower7.VanePositionSetPoint', 0)
+                    'InOperation': int(float(self._plc_state.get('Blower8.InOperation', 0))),
+                    'Power': self._plc_state.get('Blower8.Power', 0),
+                    'StartStopSignal': int(float(self._plc_state.get('Blower8.StartStopSignal', 0))),
+                    'VanePositionReadings': self._plc_state.get('Blower8.VanePositionReadings', 0),
+                    'VanePositionSetPoint': self._plc_state.get('Blower8.VanePositionSetPoint', 0)
                     },
                 'Tank3': {
                     'HydraulicFlow': {
@@ -118,66 +118,66 @@ class PLCReader:
                     },
                     'Grid4': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid4.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid4.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid4.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid4.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid4.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid4.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid4.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid4.NH3.SetPoint', 0)
                         }
                     },
                     'Grid5': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid5.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid5.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid5.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid5.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid5.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid5.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid5.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid5.NH3.SetPoint', 0)
                         }
                     },
                     'Grid6': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid6.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid6.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid6.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid6.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid6.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid6.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid6.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid6.NH3.SetPoint', 0)
                         }
                     },
                     'Grid7': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid7.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid7.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank3.Grid7.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank3.Grid7.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid7.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid7.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank3.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank3.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank3.Grid7.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank3.Grid7.NH3.SetPoint', 0)
                         }
                     }                    
                 },
@@ -209,72 +209,72 @@ class PLCReader:
                     },
                     'Grid4': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid4.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid4.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid4.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid4.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid4.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid4.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid4.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid4.NH3.SetPoint', 0)
                         }
                     },
                     'Grid5': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid5.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid5.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid5.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid5.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid5.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid5.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid5.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid5.NH3.SetPoint', 0)
                         }
                     },
                     'Grid6': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid6.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid6.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid6.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid6.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid6.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid6.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid6.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid6.NH3.SetPoint', 0)
                         }
                     },
                     'Grid7': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid7.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid7.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank4.Grid7.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank4.Grid7.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid7.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid7.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank4.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank4.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank4.Grid7.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank4.Grid7.NH3.SetPoint', 0)
                         }
                     }                    
                 },
                 'Tank5': {
                     'HydraulicFlow': {
-                        'MeterReadings': self._plc_state.get('Tank4.HydraulicFlow.MeterReadings', 0)
+                        'MeterReadings': self._plc_state.get('Tank5.HydraulicFlow.MeterReadings', 0)
                     },
                     'Airflow': {
                         'MeterReadings': self._plc_state.get('Tank5.Airflow.MeterReadings', 0),
@@ -300,66 +300,66 @@ class PLCReader:
                     },
                     'Grid4': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid4.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid4.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid4.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid4.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid4.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid4.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid4.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid4.NH3.SetPoint', 0)
                         }
                     },
                     'Grid5': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid5.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid5.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid5.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid5.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid5.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid5.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid5.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid5.NH3.SetPoint', 0)
                         }
                     },
                     'Grid6': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid6.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid6.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid6.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid6.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid6.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid6.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid6.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid6.NH3.SetPoint', 0)
                         }
                     },
                     'Grid7': {
                         'Airflow': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.Airflow.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.Airflow.SetPoint', 0),
-                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionReadings', 0),
-                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid3.Airflow.ValvePositionSetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid7.Airflow.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid7.Airflow.SetPoint', 0),
+                            'ValvePositionReadings': self._plc_state.get('Tank5.Grid7.Airflow.ValvePositionReadings', 0),
+                            'ValvePositionSetPoint': self._plc_state.get('Tank5.Grid7.Airflow.ValvePositionSetPoint', 0)
                         },
                         'DO': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.DO.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.DO.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid7.DO.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid7.DO.SetPoint', 0)
                         },
                         'NH3': {
-                            'MeterReadings': self._plc_state.get('Tank5.Grid3.NH3.MeterReadings', 0),
-                            'SetPoint': self._plc_state.get('Tank5.Grid3.NH3.SetPoint', 0)
+                            'MeterReadings': self._plc_state.get('Tank5.Grid7.NH3.MeterReadings', 0),
+                            'SetPoint': self._plc_state.get('Tank5.Grid7.NH3.SetPoint', 0)
                         }
                     }                    
                 }
@@ -416,7 +416,6 @@ if __name__ == '__main__':
         tags = [line.strip() for line in file]
     
     time_interval = 60*60*24 # 24 hrs.
-    # time_interval = 60*5 # 5 min.
         
     plcreader = PLCReader(tags)    
     plcreader.start(interval=1) # One time per 1 sec.
@@ -427,6 +426,9 @@ if __name__ == '__main__':
     plcreader._logger.info(f'Time interval: {time_interval}')
     
     try:
+        while True:
+            ...
+        
         time.sleep(time_interval)
         plcreader._logger.info('Timer interrupt ...')
         print("\nTimer interrupt ...")
