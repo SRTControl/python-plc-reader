@@ -35,6 +35,11 @@ class PLCReader:
                     datefmt='%Y-%m-%d %H:%M:%S')             
         self._logger = logging.getLogger(__name__)
         
+        # Reduce log level for pika
+        logging.getLogger("pika").setLevel(logging.WARNING)
+        # Disable propagation for pika
+        logging.getLogger("pika").propagate = False
+        
     def read_plc(self):
         #####################################################
         # PLC reader action
@@ -365,11 +370,7 @@ class PLCReader:
                 }
             }
             # Sending the data to RabbitMQ
-            self._producer.send_dict(plant_data, 'plc_read_queue')
-            
-            #json_string = json.dumps(plant, ensure_ascii=False, indent=2)
-            #self._logger.debug('DONE Debug')
-            #self._logger.info('DONE Info')
+            self._producer.send_dict(plant_data, 'plc_read_queue')            
             
         #####################################################
         

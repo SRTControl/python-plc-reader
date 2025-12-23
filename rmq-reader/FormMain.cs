@@ -85,7 +85,6 @@ namespace RMQReader
                 try
                 {
                     var data = JsonConvert.DeserializeObject<PlantData>(jsonString);
-                    appLog.Info(jsonString);
 
                     if (data != null)
                     {
