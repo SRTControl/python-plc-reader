@@ -98,14 +98,7 @@ class RabbitMQProducer:
                 properties = properties,
                 mandatory = True  # Guarantee delivery
             )
-            
-            #print(f"\n")
-            #print(f"Sent to queue '{queue_name}':")
-            #print(f"Size: {len(message_body)} байт")
-            #print(f"Time: {datetime.now().strftime('%H:%M:%S')}")
-            #print(f"Data: {message_body}")
-            #print(f"{message_body}")
-            
+                        
             return True
             
         except Exception as e:
