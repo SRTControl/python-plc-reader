@@ -1,12 +1,16 @@
 import logging
 import threading
 import time
-import json
 import timeit
 
 from rmqhelper import RabbitMQProducer
+from enum import Enum
 
 import pylogix as pl
+
+class PLCReadMode(Enum):
+    FULL = 1    # Read FULL tag list
+    DIFF = 2    # Read DIFF tag list
 
 class PLCReader:
     '''
@@ -21,13 +25,21 @@ class PLCReader:
         start (int): Start the PLCReader
         stop(): Stop the PLCReader
     '''
-    def __init__(self, tags):        
+    def __init__(self, tags, plc_read_mode, full_read_interval=300):        
         # Self configuration
         self._stop_event = threading.Event();        
         self._thread = None
         self._tags = tags
+        self._tags_diff = tags
+        self._plc_readmode = plc_read_mode
         self._plc_state = {}
         self._producer = None
+        self._plc_fullread_interval = full_read_interval
+        self._plc_fullread_timestemp = int(time.time())
+        
+        self._plc = pl.PLC()
+        self._plc.IPAddress = '192.142.0.11'
+        self._plc.SocketTimeout = 2
                 
         # Logger configuration
         logging.basicConfig(filename='logger-example.log',
@@ -44,40 +56,42 @@ class PLCReader:
     def read_plc(self):
         #####################################################
         # PLC reader action
-        with pl.PLC() as plc:
-            plc.IPAddress = '192.142.0.11' # PLC IP address
-            
-            startReadTheTags = timeit.default_timer()
-            results = plc.Read(self._tags) # Read the tags
-            endReadTheTags = timeit.default_timer()
-            
-            startPLCBuffer = timeit.default_timer()
-            plc_buff = {} # Temporary PLC buffer
-            for result in results:                
-                if result.Status == 'Success':
-                    if result.Value is not None:
-                        plc_buff[result.TagName] = f'{result.Value:0.2f}'
-                    else:
-                        plc_buff[result.TagName] = 'NONE'
-                        
-            endPLCBuffer = timeit.default_timer()
-            
-            startNewValues = timeit.default_timer()
-            # The dictionary with the new values only            
-            plc_diff = {k: v for k, v in plc_buff.items() 
-                       if k not in self._plc_state or self._plc_state[k] != v}
-            
-            if len(plc_diff) > 0:
-                self._plc_state.update(plc_diff)
-            endNewValues = timeit.default_timer()
-            
-            hhmm_time = time.strftime('%H:%M:%S')
-            unix_time = int(time.time())
-            
-            startMapping = timeit.default_timer()
-            # Mapping PLC to the Plant structure
-            plant_data = {
-                'TimeStamp': int(time.time()),
+        startReadTheTags = timeit.default_timer()
+        if self._plc_readmode == PLCReadMode.FULL:
+            results = self._plc.Read(self._tags) # Read ALL tags
+        elif self._plc_readmode == PLCReadMode.OFTEN:
+            if int(time.time()) - self._plc_fullread_timestemp >= self._plc_fullread_interval:
+                self._plc_fullread_timestemp = int(time.time())
+                results = self._plc.Read(self._tags) # Read ALL tags
+            else:
+                results = self._plc.Read(self._tags_diff) # Read DIFF tags
+        endReadTheTags = timeit.default_timer()            
+        
+        startPLCBuffer = timeit.default_timer()            
+        plc_buff = {} # Temporary PLC buffer
+        for result in results:
+            if result.Status == 'Success':
+                if result.Value is not None:
+                    plc_buff[result.TagName] = f'{result.Value:0.2f}'
+                else:
+                    plc_buff[result.TagName] = 'NONE'
+        endPLCBuffer = timeit.default_timer()
+        
+        startNewValues = timeit.default_timer()
+        # The dictionary with the new values only
+        plc_diff = {k: v for k, v in plc_buff.items() if k not in self._plc_state or self._plc_state[k] != v}
+        if len(plc_diff) > 0:
+            self._plc_state.update(plc_diff)
+            self._tags_diff = list(plc_diff.keys()) # Save the DIFF tags list
+        endNewValues = timeit.default_timer()
+        
+        hhmm_time = time.strftime('%H:%M:%S')
+        unix_time = int(time.time())
+        
+        startMapping = timeit.default_timer()
+        # Mapping PLC to the Plant structure
+        plant_data = {
+                'TimeStamp': unix_time,
                 'Common': {
                     'AirTemperatureReadings': self._plc_state.get('Common.AirTemperatureReadings', 0),
                     'IsDOmasterInOperation': int(float(self._plc_state.get('Common.IsDOmasterInOperation', 0))),
@@ -376,22 +390,16 @@ class PLCReader:
                     }                    
                 }
             }
-            endMapping = timeit.default_timer()
-            
-            startRabbitMQ = timeit.default_timer()
-            # Sending the data to RabbitMQ
-            self._producer.send_dict(plant_data, 'plc_read_queue')            
-            endRabbitMQ = timeit.default_timer()
-            
-            print(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}; \
-                T: {endReadTheTags - startReadTheTags:.6f}; \
-                    B: {endPLCBuffer - startPLCBuffer:.6f}; \
-                        N: {endNewValues - startNewValues:.6f}; \
-                            M: {endMapping - startMapping:.6f}; \
-                                R: {endRabbitMQ - startRabbitMQ:.6f}; ')
-            # logger is disabled to save the time...
-            # self._logger.info(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}')
-            
+        endMapping = timeit.default_timer()
+        
+        startRabbitMQ = timeit.default_timer()
+        # Sending the data to RabbitMQ
+        self._producer.send_dict(plant_data, 'plc_read_queue')            
+        endRabbitMQ = timeit.default_timer()
+        
+        print(f'{hhmm_time}: {len(self._plc_state)}/{len(results)};\tT: {endReadTheTags - startReadTheTags:.6f}; B: {endPLCBuffer - startPLCBuffer:.6f}; N: {endNewValues - startNewValues:.6f}; M: {endMapping - startMapping:.6f}; R: {endRabbitMQ - startRabbitMQ:.6f}')
+        # logger is disabled to save the time...
+        # self._logger.info(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}')
         #####################################################
         
     def start(self, interval = 5):
@@ -438,7 +446,7 @@ if __name__ == '__main__':
     
     time_interval = 60*60*24 # 24 hrs.
         
-    plcreader = PLCReader(tags)    
+    plcreader = PLCReader(tags, PLCReadMode.FULL)
     plcreader.start(interval=1) # One time per 1 sec.
     
     # Debug information
