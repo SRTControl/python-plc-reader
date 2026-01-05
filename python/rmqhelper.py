@@ -62,7 +62,7 @@ class RabbitMQProducer:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
         
-    def send_dict(self, data_dict, queue_name='plc_read_queue', exchange = '', priority = 0, headers = None):
+    def send_dict(self, data_dict, queue_name='plc_control_queue', exchange = '', priority = 0, headers = None):
         """
         Sending a dictionary to the queue
         

@@ -49,22 +49,23 @@
             this.Blower7 = new RMQReader.UCBlower();
             this.Blower8 = new RMQReader.UCBlower();
             this.Common = new System.Windows.Forms.GroupBox();
-            this.textBoxTimeStamp = new System.Windows.Forms.TextBox();
-            this.labelTimestamp = new System.Windows.Forms.Label();
-            this.textBoxPressure = new System.Windows.Forms.TextBox();
-            this.labelPressure = new System.Windows.Forms.Label();
-            this.textBoxAirTemperature = new System.Windows.Forms.TextBox();
-            this.labelAirTemperature = new System.Windows.Forms.Label();
-            this.textBoxRainGauge = new System.Windows.Forms.TextBox();
-            this.labelRainGauge = new System.Windows.Forms.Label();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.cbDOMasterInOperation = new System.Windows.Forms.CheckBox();
             this.textBoxPH3 = new System.Windows.Forms.TextBox();
             this.labelPH3 = new System.Windows.Forms.Label();
             this.textBoxPH2 = new System.Windows.Forms.TextBox();
             this.labelPH2 = new System.Windows.Forms.Label();
             this.textBoxPH1 = new System.Windows.Forms.TextBox();
             this.labelPH1 = new System.Windows.Forms.Label();
-            this.cbDOMasterInOperation = new System.Windows.Forms.CheckBox();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.textBoxRainGauge = new System.Windows.Forms.TextBox();
+            this.labelRainGauge = new System.Windows.Forms.Label();
+            this.textBoxAirTemperature = new System.Windows.Forms.TextBox();
+            this.labelAirTemperature = new System.Windows.Forms.Label();
+            this.textBoxPressure = new System.Windows.Forms.TextBox();
+            this.labelPressure = new System.Windows.Forms.Label();
+            this.textBoxTimeStamp = new System.Windows.Forms.TextBox();
+            this.labelTimestamp = new System.Windows.Forms.Label();
+            this.textBoxQueueName = new System.Windows.Forms.TextBox();
             this.Common.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
@@ -79,7 +80,7 @@
             this.buttonConnection.TabIndex = 0;
             this.buttonConnection.Text = "CONNECT";
             this.buttonConnection.UseVisualStyleBackColor = true;
-            this.buttonConnection.Click += new System.EventHandler(this.buttonConnrction_Click);
+            this.buttonConnection.Click += new System.EventHandler(this.buttonConnection_Click);
             // 
             // buttonClose
             // 
@@ -385,89 +386,28 @@
             this.Common.TabStop = false;
             this.Common.Text = "COMMON";
             // 
-            // textBoxTimeStamp
+            // pictureBoxLogo
             // 
-            this.textBoxTimeStamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxTimeStamp.Location = new System.Drawing.Point(58, 23);
-            this.textBoxTimeStamp.Name = "textBoxTimeStamp";
-            this.textBoxTimeStamp.Size = new System.Drawing.Size(106, 20);
-            this.textBoxTimeStamp.TabIndex = 8;
-            this.textBoxTimeStamp.Text = "0.00";
-            this.textBoxTimeStamp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pictureBoxLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxLogo.Image = global::RMQReader.Properties.Resources.logo;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(366, 18);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(150, 100);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLogo.TabIndex = 22;
+            this.pictureBoxLogo.TabStop = false;
             // 
-            // labelTimestamp
+            // cbDOMasterInOperation
             // 
-            this.labelTimestamp.AutoSize = true;
-            this.labelTimestamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelTimestamp.ForeColor = System.Drawing.Color.DimGray;
-            this.labelTimestamp.Location = new System.Drawing.Point(12, 27);
-            this.labelTimestamp.Name = "labelTimestamp";
-            this.labelTimestamp.Size = new System.Drawing.Size(21, 13);
-            this.labelTimestamp.TabIndex = 7;
-            this.labelTimestamp.Text = "TS";
-            // 
-            // textBoxPressure
-            // 
-            this.textBoxPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPressure.Location = new System.Drawing.Point(114, 49);
-            this.textBoxPressure.Name = "textBoxPressure";
-            this.textBoxPressure.Size = new System.Drawing.Size(50, 20);
-            this.textBoxPressure.TabIndex = 10;
-            this.textBoxPressure.Text = "0.00";
-            this.textBoxPressure.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // labelPressure
-            // 
-            this.labelPressure.AutoSize = true;
-            this.labelPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPressure.ForeColor = System.Drawing.Color.DimGray;
-            this.labelPressure.Location = new System.Drawing.Point(12, 53);
-            this.labelPressure.Name = "labelPressure";
-            this.labelPressure.Size = new System.Drawing.Size(48, 13);
-            this.labelPressure.TabIndex = 9;
-            this.labelPressure.Text = "Pressure";
-            // 
-            // textBoxAirTemperature
-            // 
-            this.textBoxAirTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxAirTemperature.Location = new System.Drawing.Point(114, 75);
-            this.textBoxAirTemperature.Name = "textBoxAirTemperature";
-            this.textBoxAirTemperature.Size = new System.Drawing.Size(50, 20);
-            this.textBoxAirTemperature.TabIndex = 12;
-            this.textBoxAirTemperature.Text = "0.00";
-            this.textBoxAirTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // labelAirTemperature
-            // 
-            this.labelAirTemperature.AutoSize = true;
-            this.labelAirTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAirTemperature.ForeColor = System.Drawing.Color.DimGray;
-            this.labelAirTemperature.Location = new System.Drawing.Point(12, 79);
-            this.labelAirTemperature.Name = "labelAirTemperature";
-            this.labelAirTemperature.Size = new System.Drawing.Size(79, 13);
-            this.labelAirTemperature.TabIndex = 11;
-            this.labelAirTemperature.Text = "AirTemperature";
-            // 
-            // textBoxRainGauge
-            // 
-            this.textBoxRainGauge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxRainGauge.Location = new System.Drawing.Point(114, 101);
-            this.textBoxRainGauge.Name = "textBoxRainGauge";
-            this.textBoxRainGauge.Size = new System.Drawing.Size(50, 20);
-            this.textBoxRainGauge.TabIndex = 14;
-            this.textBoxRainGauge.Text = "0.00";
-            this.textBoxRainGauge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // labelRainGauge
-            // 
-            this.labelRainGauge.AutoSize = true;
-            this.labelRainGauge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelRainGauge.ForeColor = System.Drawing.Color.DimGray;
-            this.labelRainGauge.Location = new System.Drawing.Point(12, 105);
-            this.labelRainGauge.Name = "labelRainGauge";
-            this.labelRainGauge.Size = new System.Drawing.Size(61, 13);
-            this.labelRainGauge.TabIndex = 13;
-            this.labelRainGauge.Text = "RainGauge";
+            this.cbDOMasterInOperation.AutoSize = true;
+            this.cbDOMasterInOperation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbDOMasterInOperation.ForeColor = System.Drawing.Color.DimGray;
+            this.cbDOMasterInOperation.Location = new System.Drawing.Point(191, 25);
+            this.cbDOMasterInOperation.Name = "cbDOMasterInOperation";
+            this.cbDOMasterInOperation.Size = new System.Drawing.Size(84, 17);
+            this.cbDOMasterInOperation.TabIndex = 21;
+            this.cbDOMasterInOperation.Text = "In Operation";
+            this.cbDOMasterInOperation.UseVisualStyleBackColor = true;
             // 
             // textBoxPH3
             // 
@@ -532,34 +472,105 @@
             this.labelPH1.TabIndex = 15;
             this.labelPH1.Text = "pH1";
             // 
-            // cbDOMasterInOperation
+            // textBoxRainGauge
             // 
-            this.cbDOMasterInOperation.AutoSize = true;
-            this.cbDOMasterInOperation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbDOMasterInOperation.ForeColor = System.Drawing.Color.DimGray;
-            this.cbDOMasterInOperation.Location = new System.Drawing.Point(191, 25);
-            this.cbDOMasterInOperation.Name = "cbDOMasterInOperation";
-            this.cbDOMasterInOperation.Size = new System.Drawing.Size(84, 17);
-            this.cbDOMasterInOperation.TabIndex = 21;
-            this.cbDOMasterInOperation.Text = "In Operation";
-            this.cbDOMasterInOperation.UseVisualStyleBackColor = true;
+            this.textBoxRainGauge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxRainGauge.Location = new System.Drawing.Point(114, 101);
+            this.textBoxRainGauge.Name = "textBoxRainGauge";
+            this.textBoxRainGauge.Size = new System.Drawing.Size(50, 20);
+            this.textBoxRainGauge.TabIndex = 14;
+            this.textBoxRainGauge.Text = "0.00";
+            this.textBoxRainGauge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pictureBoxLogo
+            // labelRainGauge
             // 
-            this.pictureBoxLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxLogo.Image = global::RMQReader.Properties.Resources.logo;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(366, 18);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(150, 100);
-            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLogo.TabIndex = 22;
-            this.pictureBoxLogo.TabStop = false;
+            this.labelRainGauge.AutoSize = true;
+            this.labelRainGauge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRainGauge.ForeColor = System.Drawing.Color.DimGray;
+            this.labelRainGauge.Location = new System.Drawing.Point(12, 105);
+            this.labelRainGauge.Name = "labelRainGauge";
+            this.labelRainGauge.Size = new System.Drawing.Size(61, 13);
+            this.labelRainGauge.TabIndex = 13;
+            this.labelRainGauge.Text = "RainGauge";
+            // 
+            // textBoxAirTemperature
+            // 
+            this.textBoxAirTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxAirTemperature.Location = new System.Drawing.Point(114, 75);
+            this.textBoxAirTemperature.Name = "textBoxAirTemperature";
+            this.textBoxAirTemperature.Size = new System.Drawing.Size(50, 20);
+            this.textBoxAirTemperature.TabIndex = 12;
+            this.textBoxAirTemperature.Text = "0.00";
+            this.textBoxAirTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelAirTemperature
+            // 
+            this.labelAirTemperature.AutoSize = true;
+            this.labelAirTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAirTemperature.ForeColor = System.Drawing.Color.DimGray;
+            this.labelAirTemperature.Location = new System.Drawing.Point(12, 79);
+            this.labelAirTemperature.Name = "labelAirTemperature";
+            this.labelAirTemperature.Size = new System.Drawing.Size(79, 13);
+            this.labelAirTemperature.TabIndex = 11;
+            this.labelAirTemperature.Text = "AirTemperature";
+            // 
+            // textBoxPressure
+            // 
+            this.textBoxPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressure.Location = new System.Drawing.Point(114, 49);
+            this.textBoxPressure.Name = "textBoxPressure";
+            this.textBoxPressure.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressure.TabIndex = 10;
+            this.textBoxPressure.Text = "0.00";
+            this.textBoxPressure.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelPressure
+            // 
+            this.labelPressure.AutoSize = true;
+            this.labelPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPressure.ForeColor = System.Drawing.Color.DimGray;
+            this.labelPressure.Location = new System.Drawing.Point(12, 53);
+            this.labelPressure.Name = "labelPressure";
+            this.labelPressure.Size = new System.Drawing.Size(48, 13);
+            this.labelPressure.TabIndex = 9;
+            this.labelPressure.Text = "Pressure";
+            // 
+            // textBoxTimeStamp
+            // 
+            this.textBoxTimeStamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxTimeStamp.Location = new System.Drawing.Point(58, 23);
+            this.textBoxTimeStamp.Name = "textBoxTimeStamp";
+            this.textBoxTimeStamp.Size = new System.Drawing.Size(106, 20);
+            this.textBoxTimeStamp.TabIndex = 8;
+            this.textBoxTimeStamp.Text = "0.00";
+            this.textBoxTimeStamp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelTimestamp
+            // 
+            this.labelTimestamp.AutoSize = true;
+            this.labelTimestamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTimestamp.ForeColor = System.Drawing.Color.DimGray;
+            this.labelTimestamp.Location = new System.Drawing.Point(12, 27);
+            this.labelTimestamp.Name = "labelTimestamp";
+            this.labelTimestamp.Size = new System.Drawing.Size(21, 13);
+            this.labelTimestamp.TabIndex = 7;
+            this.labelTimestamp.Text = "TS";
+            // 
+            // textBoxQueueName
+            // 
+            this.textBoxQueueName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxQueueName.Location = new System.Drawing.Point(185, 559);
+            this.textBoxQueueName.Name = "textBoxQueueName";
+            this.textBoxQueueName.Size = new System.Drawing.Size(522, 26);
+            this.textBoxQueueName.TabIndex = 23;
+            this.textBoxQueueName.Text = "plc_control_queue";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 595);
+            this.Controls.Add(this.textBoxQueueName);
             this.Controls.Add(this.Common);
             this.Controls.Add(this.Blower8);
             this.Controls.Add(this.Blower7);
@@ -589,6 +600,7 @@
             this.Common.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -630,6 +642,7 @@
         private System.Windows.Forms.Label labelPH1;
         private System.Windows.Forms.CheckBox cbDOMasterInOperation;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.TextBox textBoxQueueName;
     }
 }
 

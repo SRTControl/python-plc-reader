@@ -4,3 +4,5 @@ data.xml
 /rmq-reader/bin
 /rmq-reader/obj
 /rmq-reader/packages
+/rmq-monitor/bin
+/rmq-monitor/obj
