@@ -26,6 +26,7 @@ class PLCReader:
         self._thread = None
         self._tags = tags
         self._plc_state = {}
+        self._plc_state_diff = {}
         self._producer = None
         self._plc_fullread_interval = full_read_interval
         self._plc_fullread_timestamp = int(time.time()) + full_read_interval
@@ -375,18 +376,23 @@ class PLCReader:
         self._producer.send_dict(plant_data, 'plc_control_queue')
         # Sending the data to RabbitMQ - Monitor Queue
         
-        plc_monitor = {}
+        self._plc_state_diff = {}
         if int(time.time()) - self._plc_fullread_timestamp >= self._plc_fullread_interval:
             self._plc_fullread_timestamp = int(time.time())
-            plc_monitor = self._plc_state.copy() # Read ALL tags
+            self._plc_state_diff = self._plc_state.copy() # Read ALL tags
         else:
-            plc_monitor = plc_diff.copy() # Read DIFF tags
+            self._plc_state_diff = plc_diff.copy() # Read DIFF tags
         
-        self._producer.send_dict(plc_monitor, 'plc_monitor_queue')
+        plant_data_diff = {
+            'TimeStamp': unix_time,
+            'PlantData': self._plc_state_diff
+        }
+        
+        self._producer.send_dict(plant_data_diff, 'plc_monitor_queue')
         
         endReadPLC = timeit.default_timer()
                 
-        print(f'{hhmm_time}: {len(results)}/{len(self._plc_state)}/{len(plc_monitor)}\tT: {endReadPLC - startReadPLC:.6f}')
+        print(f'{hhmm_time}: {len(results)}/{len(self._plc_state)}/{len(self._plc_state_diff)}\tT: {endReadPLC - startReadPLC:.6f}')
         #####################################################
         
     def start(self, interval = 5):
@@ -434,7 +440,7 @@ if __name__ == '__main__':
     
     time_interval = 60*60*24 # 24 hrs.
         
-    plcreader = PLCReader(tags, 10)
+    plcreader = PLCReader(tags, 60) # Full read for the monitoring one time per 50 sec
     plcreader.start(interval=1) # One time per 1 sec.
     
     # Debug information
