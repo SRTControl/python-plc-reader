@@ -1,7 +1,7 @@
 import logging
 import threading
 import time
-import json
+import timeit
 
 from rmqhelper import RabbitMQProducer
 
@@ -20,13 +20,20 @@ class PLCReader:
         start (int): Start the PLCReader
         stop(): Stop the PLCReader
     '''
-    def __init__(self, tags):        
+    def __init__(self, tags, full_read_interval=300):        
         # Self configuration
         self._stop_event = threading.Event();        
         self._thread = None
         self._tags = tags
         self._plc_state = {}
         self._producer = None
+        self._plc_fullread_interval = full_read_interval
+        self._plc_fullread_timestamp = int(time.time()) + full_read_interval
+        
+        # PLC connection initialization
+        self._plc = pl.PLC()
+        self._plc.IPAddress = '192.142.0.11'
+        self._plc.SocketTimeout = 2
                 
         # Logger configuration
         logging.basicConfig(filename='logger-example.log',
@@ -41,36 +48,30 @@ class PLCReader:
         logging.getLogger("pika").propagate = False
         
     def read_plc(self):
+        startReadPLC = timeit.default_timer()
         #####################################################
         # PLC reader action
-        with pl.PLC() as plc:
-            plc.IPAddress = '192.142.0.11' # PLC IP address
-            results = plc.Read(self._tags) # Read the tags
-            
-            plc_buff = {} # Temporary PLC buffer
-            for result in results:                
-                if result.Status == 'Success':
-                    if result.Value is not None:
-                        plc_buff[result.TagName] = f'{result.Value:0.2f}'
-                    else:
-                        plc_buff[result.TagName] = 'NONE'
-            
-            # The dictionary with the new values only            
-            plc_diff = {k: v for k, v in plc_buff.items() 
-                       if k not in self._plc_state or self._plc_state[k] != v}
-            
-            if len(plc_diff) > 0:
-                self._plc_state.update(plc_diff)
-            
-            hhmm_time = time.strftime('%H:%M:%S')
-            unix_time = int(time.time())
-            
-            print(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}')
-            self._logger.info(f'{hhmm_time}: {len(self._plc_state)}/{len(plc_diff)}')
-            
-            # Mapping PLC to the Plant structure
-            plant_data = {
-                'TimeStamp': int(time.time()),
+        results = self._plc.Read(self._tags) # Read ALL tags
+        
+        plc_buff = {} # Temporary PLC buffer
+        for result in results:
+            if result.Status == 'Success':
+                if result.Value is not None:
+                    plc_buff[result.TagName] = f'{result.Value:0.2f}'
+                else:
+                    plc_buff[result.TagName] = 'NONE'
+                
+        # The dictionary with the new values only
+        plc_diff = {k: v for k, v in plc_buff.items() if k not in self._plc_state or self._plc_state[k] != v}
+        if len(plc_diff) > 0:
+            self._plc_state.update(plc_diff)
+        
+        hhmm_time = time.strftime('%H:%M:%S')
+        unix_time = int(time.time())
+        
+        # Mapping PLC to the Plant structure
+        plant_data = {
+                'TimeStamp': unix_time,
                 'Common': {
                     'AirTemperatureReadings': self._plc_state.get('Common.AirTemperatureReadings', 0),
                     'IsDOmasterInOperation': int(float(self._plc_state.get('Common.IsDOmasterInOperation', 0))),
@@ -369,9 +370,23 @@ class PLCReader:
                     }                    
                 }
             }
-            # Sending the data to RabbitMQ
-            self._producer.send_dict(plant_data, 'plc_read_queue')            
-            
+                
+        # Sending the data to RabbitMQ - Control Queue
+        self._producer.send_dict(plant_data, 'plc_control_queue')
+        # Sending the data to RabbitMQ - Monitor Queue
+        
+        plc_monitor = {}
+        if int(time.time()) - self._plc_fullread_timestamp >= self._plc_fullread_interval:
+            self._plc_fullread_timestamp = int(time.time())
+            plc_monitor = self._plc_state.copy() # Read ALL tags
+        else:
+            plc_monitor = plc_diff.copy() # Read DIFF tags
+        
+        self._producer.send_dict(plc_monitor, 'plc_monitor_queue')
+        
+        endReadPLC = timeit.default_timer()
+                
+        print(f'{hhmm_time}: {len(results)}/{len(self._plc_state)}/{len(plc_monitor)}\tT: {endReadPLC - startReadPLC:.6f}')
         #####################################################
         
     def start(self, interval = 5):
@@ -385,7 +400,8 @@ class PLCReader:
         )
         # Opent the RabbitMQ connection
         if self._producer.connect():
-            self._producer.declare_queue('plc_read_queue')
+            self._producer.declare_queue('plc_control_queue')
+            self._producer.declare_queue('plc_monitor_queue')
         
         def worker():
             while not self._stop_event.is_set():
@@ -418,7 +434,7 @@ if __name__ == '__main__':
     
     time_interval = 60*60*24 # 24 hrs.
         
-    plcreader = PLCReader(tags)    
+    plcreader = PLCReader(tags, 10)
     plcreader.start(interval=1) # One time per 1 sec.
     
     # Debug information
