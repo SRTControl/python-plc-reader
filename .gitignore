@@ -6,3 +6,6 @@ data.xml
 /rmq-reader/packages
 /rmq-monitor/bin
 /rmq-monitor/obj
+RMQWriter/obj/
+rmq-writer/obj/
+rmq-writer/bin/

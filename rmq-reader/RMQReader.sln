@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQReader", "RMQReader.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQMonitor", "..\rmq-monitor\RMQMonitor.csproj", "{3E0D108E-4C65-44FA-8349-96FB1D58D4C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQWriter", "..\rmq-writer\RMQWriter.csproj", "{21055768-7E16-4010-8A9D-9096C5A3EDDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3E0D108E-4C65-44FA-8349-96FB1D58D4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E0D108E-4C65-44FA-8349-96FB1D58D4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E0D108E-4C65-44FA-8349-96FB1D58D4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21055768-7E16-4010-8A9D-9096C5A3EDDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21055768-7E16-4010-8A9D-9096C5A3EDDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21055768-7E16-4010-8A9D-9096C5A3EDDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21055768-7E16-4010-8A9D-9096C5A3EDDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
