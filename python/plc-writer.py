@@ -32,6 +32,27 @@ def process_message(ch, method, properties, body):
     pressure_min = data.get("PlantDO.PLCB.Common.PressureMIN")
     pressure_max = data.get("PlantDO.PLCB.Common.PressureMAX")
     
+    # Format values to 2 decimal places
+    blower5_delta = f"{blower5_delta:.2f}" if blower5_delta is not None else "N/A"
+    blower5_min = f"{blower5_min:.2f}" if blower5_min is not None else "N/A"
+    blower5_max = f"{blower5_max:.2f}" if blower5_max is not None else "N/A"
+    
+    blower6_delta = f"{blower6_delta:.2f}" if blower6_delta is not None else "N/A"
+    blower6_min = f"{blower6_min:.2f}" if blower6_min is not None else "N/A"
+    blower6_max = f"{blower6_max:.2f}" if blower6_max is not None else "N/A"
+    
+    blower7_delta = f"{blower7_delta:.2f}" if blower7_delta is not None else "N/A"
+    blower7_min = f"{blower7_min:.2f}" if blower7_min is not None else "N/A"
+    blower7_max = f"{blower7_max:.2f}" if blower7_max is not None else "N/A"
+    
+    blower8_delta = f"{blower8_delta:.2f}" if blower8_delta is not None else "N/A"
+    blower8_min = f"{blower8_min:.2f}" if blower8_min is not None else "N/A"
+    blower8_max = f"{blower8_max:.2f}" if blower8_max is not None else "N/A"
+    
+    pressure_delta = f"{pressure_delta:.2f}" if pressure_delta is not None else "N/A"
+    pressure_min = f"{pressure_min:.2f}" if pressure_min is not None else "N/A"
+    pressure_max = f"{pressure_max:.2f}" if pressure_max is not None else "N/A"
+    
     # Get current timestamp in HH:MM:SS format
     current_time = datetime.now().strftime("%H:%M:%S")
     
