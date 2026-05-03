@@ -8,16 +8,20 @@ import argparse
 from datetime import datetime
 import pylogix as pl
 
+# Global PLC object
+plc_client = None
+
 def write_to_plc(tag_name, value):
-    """Write a single value to PLC"""
+    """Write a single value to PLC using global connection"""
+    global plc_client
+    
+    if plc_client is None:
+        print(f"ERROR: PLC not connected")
+        return False
+    
     try:
-        plc = pl.PLC()
-        plc.IPAddress = '192.142.0.11'  # Same IP as in plc-reader
-        plc.SocketTimeout = 2
-        
         # Write value to PLC tag
-        result = plc.Write(tag_name, float(value))
-        plc.Close()
+        result = plc_client.Write(tag_name, float(value))
         
         if result.Status == 'Success':
             return True
@@ -126,23 +130,17 @@ def process_message(ch, method, properties, body):
     if pressure_max is not None:
         plc_writes.append(("Common.PressureMAX", pressure_max))
     
-    # Write all values to PLC using a single connection
+    # Write all values to PLC using the persistent connection
     if plc_writes:
         try:
-            plc = pl.PLC()
-            plc.IPAddress = '192.142.0.11'
-            plc.SocketTimeout = 2
-            
             print(f"Writing {len(plc_writes)} values to PLC...")
             
             for tag_name, value in plc_writes:
-                result = plc.Write(tag_name, float(value))
-                if result.Status == 'Success':
+                if write_to_plc(tag_name, value):
                     print(f"SUCCESS: {tag_name} = {value:.2f}")
                 else:
-                    print(f"FAILED : {tag_name} - {result.Status}")
+                    print(f"FAILED : {tag_name}")
             
-            plc.Close()
             print("PLC write operations completed")
             
         except Exception as e:
@@ -157,6 +155,8 @@ def process_message(ch, method, properties, body):
 
 
 def main():
+    global plc_client
+    
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='RabbitMQ consumer for PLC data')
     parser.add_argument('-q', '--queue', 
@@ -178,6 +178,13 @@ def main():
     channel = None
     
     try:
+        # Initialize PLC connection once at startup
+        print(f"Connecting to PLC at 192.142.0.11...")
+        plc_client = pl.PLC()
+        plc_client.IPAddress = '192.142.0.11'
+        plc_client.SocketTimeout = 2
+        print("PLC connection established successfully")
+        
         # Connect to RabbitMQ
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(host=args.host, port=args.port)
@@ -192,7 +199,7 @@ def main():
         channel.basic_qos(prefetch_count=1)
         channel.basic_consume(queue=queue_name, on_message_callback=process_message)
         
-        print(f"Waiting for messages from queue '{queue_name}'...")
+        print(f"\nWaiting for messages from queue '{queue_name}'...")
         print(f"RabbitMQ host: {args.host}:{args.port}")
         print(f"PLC IP address: 192.142.0.11")
         print("Press Ctrl+C to stop\n")
@@ -204,7 +211,15 @@ def main():
     except Exception as e:
         print(f"\nError: {e}")
     finally:
-        # Properly close the connection
+        # Close PLC connection
+        if plc_client is not None:
+            try:
+                plc_client.Close()
+                print("PLC connection closed")
+            except Exception as e:
+                print(f"Error closing PLC connection: {e}")
+        
+        # Properly close RabbitMQ connection
         if channel and channel.is_open:
             try:
                 channel.stop_consuming()
@@ -214,7 +229,7 @@ def main():
         
         if connection and connection.is_open:
             connection.close()
-            print("Connection closed")
+            print("RabbitMQ connection closed")
         
         print("Exiting program")
 
