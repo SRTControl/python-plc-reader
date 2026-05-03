@@ -10,3 +10,4 @@ RMQWriter/obj/
 rmq-writer/obj/
 rmq-writer/bin/
 /rmq-writer/.vs
+rmq-writer/packages/

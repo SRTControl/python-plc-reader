@@ -77,7 +77,7 @@
             // 
             // timerMain
             // 
-            this.timerMain.Interval = 1000;
+            this.timerMain.Interval = 10000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // ucBL5
