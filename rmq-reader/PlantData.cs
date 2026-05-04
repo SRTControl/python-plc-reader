@@ -32,6 +32,15 @@ namespace RMQReader
 
         [JsonProperty("pHReadings_3")]
         public double pHReadings_3 { get; set; }
+
+        [JsonProperty("PressureDeltaMAX")]
+        public double PressureDeltaMAX { get; set; }
+
+        [JsonProperty("PressureMIN")]
+        public double PressureMIN { get; set; }
+
+        [JsonProperty("PressureMAX")]
+        public double PressureMAX { get; set; }
     }
     
     public class BlowerData
@@ -50,6 +59,15 @@ namespace RMQReader
 
         [JsonProperty("VanePositionSetPoint")]
         public double VanePositionSetPoint { get; set; }
+
+        [JsonProperty("VanePositionDeltaMAX")]
+        public double VanePositionDeltaMAX { get; set; }
+        
+        [JsonProperty("VanePositionMIN")]
+        public double VanePositionMIN { get; set; }
+        
+        [JsonProperty("VanePositionMAX")]
+        public double VanePositionMAX { get; set; }
     }
 
     public class HydraulicFlowData
@@ -134,6 +152,12 @@ namespace RMQReader
 
         [JsonProperty("Common")]
         public CommonData Common { get; set; }
+
+        [JsonProperty("Blower5")]
+        public BlowerData Blower5 { get; set; }
+        
+        [JsonProperty("Blower6")]
+        public BlowerData Blower6 { get; set; }
 
         [JsonProperty("Blower7")]
         public BlowerData Blower7 { get; set; }

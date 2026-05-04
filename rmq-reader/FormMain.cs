@@ -40,6 +40,8 @@ namespace RMQReader
 
             appLog = NLog.LogManager.GetCurrentClassLogger();
 
+            Blower5.Caption = "BLOWER 5";
+            Blower6.Caption = "BLOWER 6";
             Blower7.Caption = "BLOWER 7";
             Blower8.Caption = "BLOWER 8";
             
@@ -98,7 +100,32 @@ namespace RMQReader
                             cbDOMasterInOperation.Checked = (data.Common.IsDOmasterInOperation == 1);
                             textBoxPH1.Text = $"{data.Common.pHReadings_1:F2}";
                             textBoxPH2.Text = $"{data.Common.pHReadings_2:F2}";
-                            textBoxPH3.Text = $"{data.Common.pHReadings_3:F2}";                            
+                            textBoxPH3.Text = $"{data.Common.pHReadings_3:F2}";
+                            textBoxPressureDeltaMAX.Text = $"{data.Common.PressureDeltaMAX:F2}";
+                            textBoxPressureMIN.Text = $"{data.Common.PressureMIN:F2}";
+                            textBoxPressureMAX.Text = $"{data.Common.PressureMAX:F2}";
+                            #endregion
+
+                            #region BLOWER 5
+                            Blower5.VaneMR = $"{data.Blower5.VanePositionReadings:F2}";
+                            Blower5.VaneSP = $"{data.Blower5.VanePositionSetPoint:F2}";
+                            Blower5.Power = $"{data.Blower5.Power:F2}";
+                            Blower5.InOperation = (data.Blower5.InOperation == 1);
+                            Blower5.StartStop = (data.Blower5.StartStopSignal == 1);
+                            Blower5.VanePositionDeltaMAX = $"{data.Blower5.VanePositionDeltaMAX:F2}";
+                            Blower5.VanePositionMIN = $"{data.Blower5.VanePositionMIN:F2}";
+                            Blower5.VanePositionMAX = $"{data.Blower5.VanePositionMAX:F2}";
+                            #endregion
+
+                            #region BLOWER 6
+                            Blower6.VaneMR = $"{data.Blower6.VanePositionReadings:F2}";
+                            Blower6.VaneSP = $"{data.Blower6.VanePositionSetPoint:F2}";
+                            Blower6.Power = $"{data.Blower6.Power:F2}";
+                            Blower6.InOperation = (data.Blower6.InOperation == 1);
+                            Blower6.StartStop = (data.Blower6.StartStopSignal == 1);
+                            Blower6.VanePositionDeltaMAX = $"{data.Blower6.VanePositionDeltaMAX:F2}";
+                            Blower6.VanePositionMIN = $"{data.Blower6.VanePositionMIN:F2}";
+                            Blower6.VanePositionMAX = $"{data.Blower6.VanePositionMAX:F2}";
                             #endregion
 
                             #region BLOWER 7
@@ -107,6 +134,9 @@ namespace RMQReader
                             Blower7.Power = $"{data.Blower7.Power:F2}";
                             Blower7.InOperation = (data.Blower7.InOperation == 1);
                             Blower7.StartStop = (data.Blower7.StartStopSignal == 1);
+                            Blower7.VanePositionDeltaMAX = $"{data.Blower7.VanePositionDeltaMAX:F2}";
+                            Blower7.VanePositionMIN = $"{data.Blower7.VanePositionMIN:F2}";
+                            Blower7.VanePositionMAX = $"{data.Blower7.VanePositionMAX:F2}";
                             #endregion
 
                             #region BLOWER 8
@@ -115,6 +145,9 @@ namespace RMQReader
                             Blower8.Power = $"{data.Blower8.Power:F2}";
                             Blower8.InOperation = (data.Blower8.InOperation == 1);
                             Blower8.StartStop = (data.Blower8.StartStopSignal == 1);
+                            Blower8.VanePositionDeltaMAX = $"{data.Blower8.VanePositionDeltaMAX:F2}";
+                            Blower8.VanePositionMIN = $"{data.Blower8.VanePositionMIN:F2}";
+                            Blower8.VanePositionMAX = $"{data.Blower8.VanePositionMAX:F2}";
                             #endregion
 
                             #region TANK 3

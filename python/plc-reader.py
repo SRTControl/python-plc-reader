@@ -81,21 +81,50 @@ class PLCReader:
                     'WaterTemperatureReadings': self._plc_state.get('Common.WaterTemperatureReadings', 0),
                     'pHReadings_1': self._plc_state.get('Common.pHReadings_1', 0),
                     'pHReadings_2': self._plc_state.get('Common.pHReadings_2', 0),
-                    'pHReadings_3': self._plc_state.get('Common.pHReadings_3', 0)
+                    'pHReadings_3': self._plc_state.get('Common.pHReadings_3', 0),
+                    'PressureDeltaMAX': self._plc_state.get('Common.PressureDeltaMAX', 0),
+                    'PressureMIN': self._plc_state.get('Common.PressureMIN', 0),
+                    'PressureMAX': self._plc_state.get('Common.PressureMAX', 0)
                 },
+                'Blower5': {
+                    'InOperation': int(float(self._plc_state.get('Blower5.InOperation', 0))),
+                    'Power': self._plc_state.get('Blower5.Power', 0),
+                    'StartStopSignal': int(float(self._plc_state.get('Blower5.StartStopSignal', 0))),
+                    'VanePositionReadings': self._plc_state.get('Blower5.VanePositionReadings', 0),
+                    'VanePositionSetPoint': self._plc_state.get('Blower5.VanePositionSetPoint', 0),
+                    'VanePositionDeltaMAX': self._plc_state.get('Blower5.VanePositionDeltaMAX', 0),
+                    'VanePositionMIN': self._plc_state.get('Blower5.VanePositionMIN', 0),
+                    'VanePositionMAX': self._plc_state.get('Blower5.VanePositionMAX', 0),
+                    },
+                'Blower6': {
+                    'InOperation': int(float(self._plc_state.get('Blower6.InOperation', 0))),
+                    'Power': self._plc_state.get('Blower6.Power', 0),
+                    'StartStopSignal': int(float(self._plc_state.get('Blower6.StartStopSignal', 0))),
+                    'VanePositionReadings': self._plc_state.get('Blower6.VanePositionReadings', 0),
+                    'VanePositionSetPoint': self._plc_state.get('Blower6.VanePositionSetPoint', 0),
+                    'VanePositionDeltaMAX': self._plc_state.get('Blower6.VanePositionDeltaMAX', 0),
+                    'VanePositionMIN': self._plc_state.get('Blower6.VanePositionMIN', 0),
+                    'VanePositionMAX': self._plc_state.get('Blower6.VanePositionMAX', 0),
+                    },
                 'Blower7': {
                     'InOperation': int(float(self._plc_state.get('Blower7.InOperation', 0))),
                     'Power': self._plc_state.get('Blower7.Power', 0),
                     'StartStopSignal': int(float(self._plc_state.get('Blower7.StartStopSignal', 0))),
                     'VanePositionReadings': self._plc_state.get('Blower7.VanePositionReadings', 0),
-                    'VanePositionSetPoint': self._plc_state.get('Blower7.VanePositionSetPoint', 0)
+                    'VanePositionSetPoint': self._plc_state.get('Blower7.VanePositionSetPoint', 0),
+                    'VanePositionDeltaMAX': self._plc_state.get('Blower7.VanePositionDeltaMAX', 0),
+                    'VanePositionMIN': self._plc_state.get('Blower7.VanePositionMIN', 0),
+                    'VanePositionMAX': self._plc_state.get('Blower7.VanePositionMAX', 0),
                     },
                 'Blower8': {
                     'InOperation': int(float(self._plc_state.get('Blower8.InOperation', 0))),
                     'Power': self._plc_state.get('Blower8.Power', 0),
                     'StartStopSignal': int(float(self._plc_state.get('Blower8.StartStopSignal', 0))),
                     'VanePositionReadings': self._plc_state.get('Blower8.VanePositionReadings', 0),
-                    'VanePositionSetPoint': self._plc_state.get('Blower8.VanePositionSetPoint', 0)
+                    'VanePositionSetPoint': self._plc_state.get('Blower8.VanePositionSetPoint', 0),
+                    'VanePositionDeltaMAX': self._plc_state.get('Blower8.VanePositionDeltaMAX', 0),
+                    'VanePositionMIN': self._plc_state.get('Blower8.VanePositionMIN', 0),
+                    'VanePositionMAX': self._plc_state.get('Blower8.VanePositionMAX', 0),
                     },
                 'Tank3': {
                     'HydraulicFlow': {

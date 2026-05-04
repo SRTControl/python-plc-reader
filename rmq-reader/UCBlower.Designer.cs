@@ -29,18 +29,24 @@
         private void InitializeComponent()
         {
             this.gbPanel = new System.Windows.Forms.GroupBox();
+            this.cbStartStop = new System.Windows.Forms.CheckBox();
+            this.cbInOperation = new System.Windows.Forms.CheckBox();
             this.textBoxPower = new System.Windows.Forms.TextBox();
             this.textBoxVaneSP = new System.Windows.Forms.TextBox();
             this.labelAirflow = new System.Windows.Forms.Label();
             this.labelVane = new System.Windows.Forms.Label();
             this.textBoxVaneMR = new System.Windows.Forms.TextBox();
-            this.cbInOperation = new System.Windows.Forms.CheckBox();
-            this.cbStartStop = new System.Windows.Forms.CheckBox();
+            this.textBoxPositionMIN = new System.Windows.Forms.TextBox();
+            this.textBoxPositionMAX = new System.Windows.Forms.TextBox();
+            this.textBoxDeltaMAX = new System.Windows.Forms.TextBox();
             this.gbPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbPanel
             // 
+            this.gbPanel.Controls.Add(this.textBoxDeltaMAX);
+            this.gbPanel.Controls.Add(this.textBoxPositionMAX);
+            this.gbPanel.Controls.Add(this.textBoxPositionMIN);
             this.gbPanel.Controls.Add(this.cbStartStop);
             this.gbPanel.Controls.Add(this.cbInOperation);
             this.gbPanel.Controls.Add(this.textBoxPower);
@@ -57,12 +63,36 @@
             this.gbPanel.TabStop = false;
             this.gbPanel.Text = "BLOWER";
             // 
+            // cbStartStop
+            // 
+            this.cbStartStop.AutoSize = true;
+            this.cbStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbStartStop.ForeColor = System.Drawing.Color.DimGray;
+            this.cbStartStop.Location = new System.Drawing.Point(58, 98);
+            this.cbStartStop.Name = "cbStartStop";
+            this.cbStartStop.Size = new System.Drawing.Size(81, 17);
+            this.cbStartStop.TabIndex = 8;
+            this.cbStartStop.Text = "Start / Stop";
+            this.cbStartStop.UseVisualStyleBackColor = true;
+            // 
+            // cbInOperation
+            // 
+            this.cbInOperation.AutoSize = true;
+            this.cbInOperation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbInOperation.ForeColor = System.Drawing.Color.DimGray;
+            this.cbInOperation.Location = new System.Drawing.Point(58, 75);
+            this.cbInOperation.Name = "cbInOperation";
+            this.cbInOperation.Size = new System.Drawing.Size(82, 17);
+            this.cbInOperation.TabIndex = 7;
+            this.cbInOperation.Text = "In Operaton";
+            this.cbInOperation.UseVisualStyleBackColor = true;
+            // 
             // textBoxPower
             // 
             this.textBoxPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxPower.Location = new System.Drawing.Point(58, 49);
             this.textBoxPower.Name = "textBoxPower";
-            this.textBoxPower.Size = new System.Drawing.Size(106, 20);
+            this.textBoxPower.Size = new System.Drawing.Size(50, 20);
             this.textBoxPower.TabIndex = 6;
             this.textBoxPower.Text = "0.00";
             this.textBoxPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -110,29 +140,38 @@
             this.textBoxVaneMR.Text = "0.00";
             this.textBoxVaneMR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // cbInOperation
+            // textBoxPositionMIN
             // 
-            this.cbInOperation.AutoSize = true;
-            this.cbInOperation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbInOperation.ForeColor = System.Drawing.Color.DimGray;
-            this.cbInOperation.Location = new System.Drawing.Point(58, 75);
-            this.cbInOperation.Name = "cbInOperation";
-            this.cbInOperation.Size = new System.Drawing.Size(82, 17);
-            this.cbInOperation.TabIndex = 7;
-            this.cbInOperation.Text = "In Operaton";
-            this.cbInOperation.UseVisualStyleBackColor = true;
+            this.textBoxPositionMIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPositionMIN.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPositionMIN.Location = new System.Drawing.Point(9, 73);
+            this.textBoxPositionMIN.Name = "textBoxPositionMIN";
+            this.textBoxPositionMIN.Size = new System.Drawing.Size(43, 20);
+            this.textBoxPositionMIN.TabIndex = 9;
+            this.textBoxPositionMIN.Text = "0.00";
+            this.textBoxPositionMIN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // cbStartStop
+            // textBoxPositionMAX
             // 
-            this.cbStartStop.AutoSize = true;
-            this.cbStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbStartStop.ForeColor = System.Drawing.Color.DimGray;
-            this.cbStartStop.Location = new System.Drawing.Point(58, 98);
-            this.cbStartStop.Name = "cbStartStop";
-            this.cbStartStop.Size = new System.Drawing.Size(81, 17);
-            this.cbStartStop.TabIndex = 8;
-            this.cbStartStop.Text = "Start / Stop";
-            this.cbStartStop.UseVisualStyleBackColor = true;
+            this.textBoxPositionMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPositionMAX.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPositionMAX.Location = new System.Drawing.Point(9, 96);
+            this.textBoxPositionMAX.Name = "textBoxPositionMAX";
+            this.textBoxPositionMAX.Size = new System.Drawing.Size(43, 20);
+            this.textBoxPositionMAX.TabIndex = 10;
+            this.textBoxPositionMAX.Text = "0.00";
+            this.textBoxPositionMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxDeltaMAX
+            // 
+            this.textBoxDeltaMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxDeltaMAX.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxDeltaMAX.Location = new System.Drawing.Point(114, 50);
+            this.textBoxDeltaMAX.Name = "textBoxDeltaMAX";
+            this.textBoxDeltaMAX.Size = new System.Drawing.Size(50, 20);
+            this.textBoxDeltaMAX.TabIndex = 11;
+            this.textBoxDeltaMAX.Text = "0.00";
+            this.textBoxDeltaMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // UCBlower
             // 
@@ -157,5 +196,8 @@
         private System.Windows.Forms.TextBox textBoxVaneMR;
         private System.Windows.Forms.CheckBox cbStartStop;
         private System.Windows.Forms.CheckBox cbInOperation;
+        private System.Windows.Forms.TextBox textBoxDeltaMAX;
+        private System.Windows.Forms.TextBox textBoxPositionMAX;
+        private System.Windows.Forms.TextBox textBoxPositionMIN;
     }
 }

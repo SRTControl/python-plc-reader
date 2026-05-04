@@ -66,6 +66,11 @@
             this.textBoxTimeStamp = new System.Windows.Forms.TextBox();
             this.labelTimestamp = new System.Windows.Forms.Label();
             this.textBoxQueueName = new System.Windows.Forms.TextBox();
+            this.textBoxPressureMAX = new System.Windows.Forms.TextBox();
+            this.textBoxPressureMIN = new System.Windows.Forms.TextBox();
+            this.textBoxPressureDeltaMAX = new System.Windows.Forms.TextBox();
+            this.Blower6 = new RMQReader.UCBlower();
+            this.Blower5 = new RMQReader.UCBlower();
             this.Common.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +79,7 @@
             // 
             this.buttonConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonConnection.Location = new System.Drawing.Point(9, 557);
+            this.buttonConnection.Location = new System.Drawing.Point(9, 683);
             this.buttonConnection.Name = "buttonConnection";
             this.buttonConnection.Size = new System.Drawing.Size(170, 30);
             this.buttonConnection.TabIndex = 0;
@@ -86,7 +91,7 @@
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonClose.Location = new System.Drawing.Point(713, 557);
+            this.buttonClose.Location = new System.Drawing.Point(713, 683);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(170, 30);
             this.buttonClose.TabIndex = 1;
@@ -101,7 +106,7 @@
             this.T3G3.Caption = "GRID";
             this.T3G3.DOMR = "0.00";
             this.T3G3.DOSP = "0.00";
-            this.T3G3.Location = new System.Drawing.Point(9, 148);
+            this.T3G3.Location = new System.Drawing.Point(9, 275);
             this.T3G3.Name = "T3G3";
             this.T3G3.NH3MR = "0.00";
             this.T3G3.NH3SP = "0.00";
@@ -117,7 +122,7 @@
             this.T3G4.Caption = "GRID";
             this.T3G4.DOMR = "0.00";
             this.T3G4.DOSP = "0.00";
-            this.T3G4.Location = new System.Drawing.Point(185, 148);
+            this.T3G4.Location = new System.Drawing.Point(185, 275);
             this.T3G4.Name = "T3G4";
             this.T3G4.NH3MR = "0.00";
             this.T3G4.NH3SP = "0.00";
@@ -133,7 +138,7 @@
             this.T3G5.Caption = "GRID";
             this.T3G5.DOMR = "0.00";
             this.T3G5.DOSP = "0.00";
-            this.T3G5.Location = new System.Drawing.Point(361, 148);
+            this.T3G5.Location = new System.Drawing.Point(361, 275);
             this.T3G5.Name = "T3G5";
             this.T3G5.NH3MR = "0.00";
             this.T3G5.NH3SP = "0.00";
@@ -149,7 +154,7 @@
             this.T3G6.Caption = "GRID";
             this.T3G6.DOMR = "0.00";
             this.T3G6.DOSP = "0.00";
-            this.T3G6.Location = new System.Drawing.Point(537, 148);
+            this.T3G6.Location = new System.Drawing.Point(537, 275);
             this.T3G6.Name = "T3G6";
             this.T3G6.NH3MR = "0.00";
             this.T3G6.NH3SP = "0.00";
@@ -165,7 +170,7 @@
             this.T3G7.Caption = "GRID";
             this.T3G7.DOMR = "0.00";
             this.T3G7.DOSP = "0.00";
-            this.T3G7.Location = new System.Drawing.Point(713, 148);
+            this.T3G7.Location = new System.Drawing.Point(713, 275);
             this.T3G7.Name = "T3G7";
             this.T3G7.NH3MR = "0.00";
             this.T3G7.NH3SP = "0.00";
@@ -181,7 +186,7 @@
             this.T4G7.Caption = "GRID";
             this.T4G7.DOMR = "0.00";
             this.T4G7.DOSP = "0.00";
-            this.T4G7.Location = new System.Drawing.Point(713, 284);
+            this.T4G7.Location = new System.Drawing.Point(713, 411);
             this.T4G7.Name = "T4G7";
             this.T4G7.NH3MR = "0.00";
             this.T4G7.NH3SP = "0.00";
@@ -197,7 +202,7 @@
             this.T4G6.Caption = "GRID";
             this.T4G6.DOMR = "0.00";
             this.T4G6.DOSP = "0.00";
-            this.T4G6.Location = new System.Drawing.Point(537, 284);
+            this.T4G6.Location = new System.Drawing.Point(537, 411);
             this.T4G6.Name = "T4G6";
             this.T4G6.NH3MR = "0.00";
             this.T4G6.NH3SP = "0.00";
@@ -213,7 +218,7 @@
             this.T4G5.Caption = "GRID";
             this.T4G5.DOMR = "0.00";
             this.T4G5.DOSP = "0.00";
-            this.T4G5.Location = new System.Drawing.Point(361, 284);
+            this.T4G5.Location = new System.Drawing.Point(361, 411);
             this.T4G5.Name = "T4G5";
             this.T4G5.NH3MR = "0.00";
             this.T4G5.NH3SP = "0.00";
@@ -229,7 +234,7 @@
             this.T4G4.Caption = "GRID";
             this.T4G4.DOMR = "0.00";
             this.T4G4.DOSP = "0.00";
-            this.T4G4.Location = new System.Drawing.Point(185, 284);
+            this.T4G4.Location = new System.Drawing.Point(185, 411);
             this.T4G4.Name = "T4G4";
             this.T4G4.NH3MR = "0.00";
             this.T4G4.NH3SP = "0.00";
@@ -245,7 +250,7 @@
             this.T4G3.Caption = "GRID";
             this.T4G3.DOMR = "0.00";
             this.T4G3.DOSP = "0.00";
-            this.T4G3.Location = new System.Drawing.Point(9, 284);
+            this.T4G3.Location = new System.Drawing.Point(9, 411);
             this.T4G3.Name = "T4G3";
             this.T4G3.NH3MR = "0.00";
             this.T4G3.NH3SP = "0.00";
@@ -261,7 +266,7 @@
             this.T5G7.Caption = "GRID";
             this.T5G7.DOMR = "0.00";
             this.T5G7.DOSP = "0.00";
-            this.T5G7.Location = new System.Drawing.Point(713, 420);
+            this.T5G7.Location = new System.Drawing.Point(713, 547);
             this.T5G7.Name = "T5G7";
             this.T5G7.NH3MR = "0.00";
             this.T5G7.NH3SP = "0.00";
@@ -277,7 +282,7 @@
             this.T5G6.Caption = "GRID";
             this.T5G6.DOMR = "0.00";
             this.T5G6.DOSP = "0.00";
-            this.T5G6.Location = new System.Drawing.Point(537, 420);
+            this.T5G6.Location = new System.Drawing.Point(537, 547);
             this.T5G6.Name = "T5G6";
             this.T5G6.NH3MR = "0.00";
             this.T5G6.NH3SP = "0.00";
@@ -293,7 +298,7 @@
             this.T5G5.Caption = "GRID";
             this.T5G5.DOMR = "0.00";
             this.T5G5.DOSP = "0.00";
-            this.T5G5.Location = new System.Drawing.Point(361, 420);
+            this.T5G5.Location = new System.Drawing.Point(361, 547);
             this.T5G5.Name = "T5G5";
             this.T5G5.NH3MR = "0.00";
             this.T5G5.NH3SP = "0.00";
@@ -309,7 +314,7 @@
             this.T5G4.Caption = "GRID";
             this.T5G4.DOMR = "0.00";
             this.T5G4.DOSP = "0.00";
-            this.T5G4.Location = new System.Drawing.Point(185, 420);
+            this.T5G4.Location = new System.Drawing.Point(185, 547);
             this.T5G4.Name = "T5G4";
             this.T5G4.NH3MR = "0.00";
             this.T5G4.NH3SP = "0.00";
@@ -325,7 +330,7 @@
             this.T5G3.Caption = "GRID";
             this.T5G3.DOMR = "0.00";
             this.T5G3.DOSP = "0.00";
-            this.T5G3.Location = new System.Drawing.Point(9, 420);
+            this.T5G3.Location = new System.Drawing.Point(9, 547);
             this.T5G3.Name = "T5G3";
             this.T5G3.NH3MR = "0.00";
             this.T5G3.NH3SP = "0.00";
@@ -338,7 +343,7 @@
             // 
             this.Blower7.Caption = "BLOWER";
             this.Blower7.InOperation = false;
-            this.Blower7.Location = new System.Drawing.Point(9, 12);
+            this.Blower7.Location = new System.Drawing.Point(361, 12);
             this.Blower7.Name = "Blower7";
             this.Blower7.Power = "0.00";
             this.Blower7.Size = new System.Drawing.Size(170, 130);
@@ -351,7 +356,7 @@
             // 
             this.Blower8.Caption = "BLOWER";
             this.Blower8.InOperation = false;
-            this.Blower8.Location = new System.Drawing.Point(185, 12);
+            this.Blower8.Location = new System.Drawing.Point(537, 12);
             this.Blower8.Name = "Blower8";
             this.Blower8.Power = "0.00";
             this.Blower8.Size = new System.Drawing.Size(170, 130);
@@ -362,6 +367,9 @@
             // 
             // Common
             // 
+            this.Common.Controls.Add(this.textBoxPressureMAX);
+            this.Common.Controls.Add(this.textBoxPressureMIN);
+            this.Common.Controls.Add(this.textBoxPressureDeltaMAX);
             this.Common.Controls.Add(this.pictureBoxLogo);
             this.Common.Controls.Add(this.cbDOMasterInOperation);
             this.Common.Controls.Add(this.textBoxPH3);
@@ -379,7 +387,7 @@
             this.Common.Controls.Add(this.textBoxTimeStamp);
             this.Common.Controls.Add(this.labelTimestamp);
             this.Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Common.Location = new System.Drawing.Point(361, 12);
+            this.Common.Location = new System.Drawing.Point(9, 144);
             this.Common.Name = "Common";
             this.Common.Size = new System.Drawing.Size(522, 130);
             this.Common.TabIndex = 22;
@@ -558,18 +566,80 @@
             // 
             // textBoxQueueName
             // 
+            this.textBoxQueueName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxQueueName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxQueueName.Location = new System.Drawing.Point(185, 559);
+            this.textBoxQueueName.Location = new System.Drawing.Point(185, 685);
             this.textBoxQueueName.Name = "textBoxQueueName";
             this.textBoxQueueName.Size = new System.Drawing.Size(522, 26);
             this.textBoxQueueName.TabIndex = 23;
             this.textBoxQueueName.Text = "plc_control_queue";
             // 
+            // textBoxMAX
+            // 
+            this.textBoxPressureMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressureMAX.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPressureMAX.Location = new System.Drawing.Point(290, 101);
+            this.textBoxPressureMAX.Name = "textBoxMAX";
+            this.textBoxPressureMAX.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressureMAX.TabIndex = 25;
+            this.textBoxPressureMAX.Text = "0.00";
+            this.textBoxPressureMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxMIN
+            // 
+            this.textBoxPressureMIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressureMIN.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPressureMIN.Location = new System.Drawing.Point(290, 75);
+            this.textBoxPressureMIN.Name = "textBoxMIN";
+            this.textBoxPressureMIN.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressureMIN.TabIndex = 24;
+            this.textBoxPressureMIN.Text = "0.00";
+            this.textBoxPressureMIN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxDeltaMAX
+            // 
+            this.textBoxPressureDeltaMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressureDeltaMAX.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPressureDeltaMAX.Location = new System.Drawing.Point(290, 49);
+            this.textBoxPressureDeltaMAX.Name = "textBoxDeltaMAX";
+            this.textBoxPressureDeltaMAX.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressureDeltaMAX.TabIndex = 23;
+            this.textBoxPressureDeltaMAX.Text = "0.00";
+            this.textBoxPressureDeltaMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Blower6
+            // 
+            this.Blower6.Caption = "BLOWER";
+            this.Blower6.InOperation = false;
+            this.Blower6.Location = new System.Drawing.Point(185, 12);
+            this.Blower6.Name = "Blower6";
+            this.Blower6.Power = "0.00";
+            this.Blower6.Size = new System.Drawing.Size(170, 130);
+            this.Blower6.StartStop = false;
+            this.Blower6.TabIndex = 25;
+            this.Blower6.VaneMR = "0.00";
+            this.Blower6.VaneSP = "0.00";
+            // 
+            // Blower5
+            // 
+            this.Blower5.Caption = "BLOWER";
+            this.Blower5.InOperation = false;
+            this.Blower5.Location = new System.Drawing.Point(9, 12);
+            this.Blower5.Name = "Blower5";
+            this.Blower5.Power = "0.00";
+            this.Blower5.Size = new System.Drawing.Size(170, 130);
+            this.Blower5.StartStop = false;
+            this.Blower5.TabIndex = 24;
+            this.Blower5.VaneMR = "0.00";
+            this.Blower5.VaneSP = "0.00";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 595);
+            this.ClientSize = new System.Drawing.Size(892, 721);
+            this.Controls.Add(this.Blower6);
+            this.Controls.Add(this.Blower5);
             this.Controls.Add(this.textBoxQueueName);
             this.Controls.Add(this.Common);
             this.Controls.Add(this.Blower8);
@@ -643,6 +713,11 @@
         private System.Windows.Forms.CheckBox cbDOMasterInOperation;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.TextBox textBoxQueueName;
+        private System.Windows.Forms.TextBox textBoxPressureMAX;
+        private System.Windows.Forms.TextBox textBoxPressureMIN;
+        private System.Windows.Forms.TextBox textBoxPressureDeltaMAX;
+        private UCBlower Blower6;
+        private UCBlower Blower5;
     }
 }
 
