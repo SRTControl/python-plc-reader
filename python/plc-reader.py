@@ -463,13 +463,12 @@ if __name__ == '__main__':
     # Read the tag list from the source file
     tags = [] # Empty tag list
     file_name = 'full-tag-list.txt' # Full tags list
-    # file_name = 'tank-3-tag-list.txt' # Lite tags list
     with open(file_name, 'r', encoding='utf-8') as file:
         tags = [line.strip() for line in file]
     
     time_interval = 60*60*24 # 24 hrs.
         
-    plcreader = PLCReader(tags, 60) # Full read for the monitoring one time per 50 sec
+    plcreader = PLCReader(tags, 60) # Full read for the monitoring one time per 60 sec
     plcreader.start(interval=1) # One time per 1 sec.
     
     # Debug information

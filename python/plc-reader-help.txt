@@ -1,0 +1,34 @@
+Python
+#######################################################################
+PLC_READER
+#######################################################################
+plc-reader.py - используется для чтения тегов напрямую с PLC
+full-tag-list.txt - список тегов для чтения. Теги перечисляются в сокращенном формате (вместо PlantDO.PLCB.Common.PressureDeltaMAX используется Common.PressureDeltaMAX)
+
+IP адрес 192.142.0.11 соответствует префиксу PlantDO.PLCB
+13-11-2025: All tags have the same IP Port and Slot because these refer to the controller the tags are read from. All the tags on the list you provided are from the same PlantDO.PLCB controller, thus they all have the same IP port and slot. Tags are accessed based on the name within the controller (PLC); there are no specific IP addresses associated with each tag. The access names within the PLC are the same as the opc tag names without the controller’s name, for example PlantDO.PLCB.Blower5.InOperation is accessed as Blower5.InOperation within the PLC via the IP connection to the PLC itself.
+
+
+Раз в минуту осуществляется чтение всех тегов, иначе - только изменяющиеся значения
+read_plc() - читает данные с PLC и заполняет структуру plant_data, которая после сериализации отправляется в очередь RMQ plc_control_queue (весь дамп данных). Далее вычисляются только те теги, значение которых изменилось. Измененная структура отправляется в очередь plc_monitor_queue (будет использоваться для программы монитора - записи в базу). Предполагается, что в монитор раз в минуту будут попадать все даннаые, даже если они не менялись. Это решит проблему с построением графиков, когда приходилось ждать окончания поиска граничных значений.
+
+rmqhelper.py - вспомогательный модуль для plc-reader
+Содержит описание класса RabbitMQProducer. Класс используется для доступа к очереди сообщений и записи в очередь значений словаря.
+
+#######################################################################
+PLC-WRITER
+#######################################################################
+plc-writer.py - используется для записи значений в PLC
+Скрипт слушает очередь RMQ plc_writer_queue. Для избежания ситуации записи в PLC всех скопившихся сообщений, предусмотрена секундная задержка, в ходе которой отсекаются все старые значения. В PLC будет записано только последнее сообщение из очереди.
+Из-за этой проверки возникает необходимость осуществлять передачу управления не чаще 1 раза в 5 секунд
+
+process_latest_message()
+1. Ищем в очереди теги и их значения (ручной меппинг)
+2. Формируем список записи plc_writes (если значение не None, добавляем в список записи пару (сокращенный_тег, значение)
+
+
+TODO:
+1. Подготовить full-tag-list.txt для реальной работы
+2. Выполнить оптимизацию 5 сек задержки модуля plc-writer
+3. plc-reader потребляет 12% CPU со старта (выяснить что именно потребляет ресурс / профайлер?)
+4. plc-reader накапливает очередь мониторинга (временно отключить)

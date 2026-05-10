@@ -34,11 +34,11 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonConnection = new System.Windows.Forms.Button();
             this.timerMain = new System.Windows.Forms.Timer(this.components);
-            this.ucBL5 = new RMQWriter.UCDeltaMinMax();
-            this.ucBL6 = new RMQWriter.UCDeltaMinMax();
-            this.ucBL7 = new RMQWriter.UCDeltaMinMax();
-            this.ucBL8 = new RMQWriter.UCDeltaMinMax();
             this.ucCM = new RMQWriter.UCDeltaMinMax();
+            this.ucBL8 = new RMQWriter.UCDeltaMinMax();
+            this.ucBL7 = new RMQWriter.UCDeltaMinMax();
+            this.ucBL6 = new RMQWriter.UCDeltaMinMax();
+            this.ucBL5 = new RMQWriter.UCDeltaMinMax();
             this.SuspendLayout();
             // 
             // textBoxQueueName
@@ -77,41 +77,19 @@
             // 
             // timerMain
             // 
-            this.timerMain.Interval = 10000;
+            this.timerMain.Interval = 5000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
-            // ucBL5
+            // ucCM
             // 
-            this.ucBL5.Caption = "BLOWER 5";
-            this.ucBL5.Delta = 0D;
-            this.ucBL5.Location = new System.Drawing.Point(12, 12);
-            this.ucBL5.Max = 0D;
-            this.ucBL5.Min = 0D;
-            this.ucBL5.Name = "ucBL5";
-            this.ucBL5.Size = new System.Drawing.Size(120, 110);
-            this.ucBL5.TabIndex = 27;
-            // 
-            // ucBL6
-            // 
-            this.ucBL6.Caption = "BLOWER 6";
-            this.ucBL6.Delta = 0D;
-            this.ucBL6.Location = new System.Drawing.Point(138, 12);
-            this.ucBL6.Max = 0D;
-            this.ucBL6.Min = 0D;
-            this.ucBL6.Name = "ucBL6";
-            this.ucBL6.Size = new System.Drawing.Size(120, 110);
-            this.ucBL6.TabIndex = 28;
-            // 
-            // ucBL7
-            // 
-            this.ucBL7.Caption = "BLOWER 7";
-            this.ucBL7.Delta = 0D;
-            this.ucBL7.Location = new System.Drawing.Point(268, 12);
-            this.ucBL7.Max = 0D;
-            this.ucBL7.Min = 0D;
-            this.ucBL7.Name = "ucBL7";
-            this.ucBL7.Size = new System.Drawing.Size(120, 110);
-            this.ucBL7.TabIndex = 29;
+            this.ucCM.Caption = "COMMON";
+            this.ucCM.Delta = 0D;
+            this.ucCM.Location = new System.Drawing.Point(12, 128);
+            this.ucCM.Max = 0D;
+            this.ucCM.Min = 0D;
+            this.ucCM.Name = "ucCM";
+            this.ucCM.Size = new System.Drawing.Size(120, 110);
+            this.ucCM.TabIndex = 31;
             // 
             // ucBL8
             // 
@@ -124,16 +102,38 @@
             this.ucBL8.Size = new System.Drawing.Size(120, 110);
             this.ucBL8.TabIndex = 30;
             // 
-            // ucCM
+            // ucBL7
             // 
-            this.ucCM.Caption = "COMMON";
-            this.ucCM.Delta = 0D;
-            this.ucCM.Location = new System.Drawing.Point(12, 128);
-            this.ucCM.Max = 0D;
-            this.ucCM.Min = 0D;
-            this.ucCM.Name = "ucCM";
-            this.ucCM.Size = new System.Drawing.Size(120, 110);
-            this.ucCM.TabIndex = 31;
+            this.ucBL7.Caption = "BLOWER 7";
+            this.ucBL7.Delta = 0D;
+            this.ucBL7.Location = new System.Drawing.Point(268, 12);
+            this.ucBL7.Max = 0D;
+            this.ucBL7.Min = 0D;
+            this.ucBL7.Name = "ucBL7";
+            this.ucBL7.Size = new System.Drawing.Size(120, 110);
+            this.ucBL7.TabIndex = 29;
+            // 
+            // ucBL6
+            // 
+            this.ucBL6.Caption = "BLOWER 6";
+            this.ucBL6.Delta = 0D;
+            this.ucBL6.Location = new System.Drawing.Point(138, 12);
+            this.ucBL6.Max = 0D;
+            this.ucBL6.Min = 0D;
+            this.ucBL6.Name = "ucBL6";
+            this.ucBL6.Size = new System.Drawing.Size(120, 110);
+            this.ucBL6.TabIndex = 28;
+            // 
+            // ucBL5
+            // 
+            this.ucBL5.Caption = "BLOWER 5";
+            this.ucBL5.Delta = 0D;
+            this.ucBL5.Location = new System.Drawing.Point(12, 12);
+            this.ucBL5.Max = 0D;
+            this.ucBL5.Min = 0D;
+            this.ucBL5.Name = "ucBL5";
+            this.ucBL5.Size = new System.Drawing.Size(120, 110);
+            this.ucBL5.TabIndex = 27;
             // 
             // FormMain
             // 
