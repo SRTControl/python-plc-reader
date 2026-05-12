@@ -41,7 +41,9 @@ class RabbitMQProducer:
                 queue = queue_name,
                 durable = durable,  # Persist messages across restarts
                 arguments = {
-                    'x-message-ttl': 86400000  # TTL 24 hrs
+                    'x-message-ttl': 86400000,  # TTL 24 hrs
+                    'x-max-length': 1,  # Maximum 1 message in queue
+                    'x-overflow': 'drop-head'  # Drop oldest message when queue is full
                 }
             )
             print(f"Queue '{queue_name}' declared")

@@ -433,6 +433,7 @@ class PLCReader:
             username = 'guest',
             password = 'guest'
         )
+        
         # Opent the RabbitMQ connection
         if self._producer.connect():
             self._producer.declare_queue('plc_control_queue')

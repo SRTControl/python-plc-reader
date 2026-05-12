@@ -39,6 +39,7 @@
             this.ucBL7 = new RMQWriter.UCDeltaMinMax();
             this.ucBL6 = new RMQWriter.UCDeltaMinMax();
             this.ucBL5 = new RMQWriter.UCDeltaMinMax();
+            this.textBoxTimerInterval = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxQueueName
@@ -50,6 +51,7 @@
             this.textBoxQueueName.Size = new System.Drawing.Size(200, 26);
             this.textBoxQueueName.TabIndex = 26;
             this.textBoxQueueName.Text = "plc_writer_queue";
+            this.textBoxQueueName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buttonClose
             // 
@@ -77,7 +79,7 @@
             // 
             // timerMain
             // 
-            this.timerMain.Interval = 5000;
+            this.timerMain.Interval = 1000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // ucCM
@@ -135,11 +137,23 @@
             this.ucBL5.Size = new System.Drawing.Size(120, 110);
             this.ucBL5.TabIndex = 27;
             // 
+            // textBoxTimerInterval
+            // 
+            this.textBoxTimerInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxTimerInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxTimerInterval.Location = new System.Drawing.Point(188, 219);
+            this.textBoxTimerInterval.Name = "textBoxTimerInterval";
+            this.textBoxTimerInterval.Size = new System.Drawing.Size(200, 26);
+            this.textBoxTimerInterval.TabIndex = 32;
+            this.textBoxTimerInterval.Text = "1000";
+            this.textBoxTimerInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 291);
+            this.Controls.Add(this.textBoxTimerInterval);
             this.Controls.Add(this.ucCM);
             this.Controls.Add(this.ucBL8);
             this.Controls.Add(this.ucBL7);
@@ -170,6 +184,7 @@
         private UCDeltaMinMax ucBL7;
         private UCDeltaMinMax ucBL8;
         private UCDeltaMinMax ucCM;
+        private System.Windows.Forms.TextBox textBoxTimerInterval;
     }
 }
 

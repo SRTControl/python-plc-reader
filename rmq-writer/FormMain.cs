@@ -49,13 +49,27 @@ namespace RMQWriter
 
             _connection = await _factory.CreateConnectionAsync();
             _channel = await _connection.CreateChannelAsync();
-            
+
+            //// Аргументы для ограничения длины очереди
+            //var arguments = new Dictionary<string, object>
+            //{
+            //    { "x-max-length", 1 },              // Максимум 1 сообщение в очереди
+            //    { "x-overflow", "drop-head" },      // Удалять самые старые при переполнении
+            //    { "x-message-ttl", 86400000 }       // TTL 24 часа (опционально)
+            //};
+
+            //await _channel.QueueDeclareAsync(
+            //    queue: _queueName,
+            //    durable: true,
+            //    exclusive: false,
+            //    autoDelete: false,
+            //    arguments: arguments);
+
             await _channel.QueueDeclareAsync(
                 queue: _queueName,
                 durable: true,
                 exclusive: false,
-                autoDelete: false,
-                arguments: null);
+                autoDelete: false);
         }
 
         private async Task CloseRabbitMQConnectionAsync()
@@ -81,6 +95,7 @@ namespace RMQWriter
             {
                 _queueName = textBoxQueueName.Text;
                 _ = OpenRabbitMQConnectionAsync();
+                timerMain.Interval = Int32.Parse(textBoxTimerInterval.Text);
                 timerMain.Start();
 
                 buttonConnection.Text = "DISCONNECT";
