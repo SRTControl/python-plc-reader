@@ -49,6 +49,9 @@
             this.Blower7 = new RMQReader.UCBlower();
             this.Blower8 = new RMQReader.UCBlower();
             this.Common = new System.Windows.Forms.GroupBox();
+            this.textBoxPressureMAX = new System.Windows.Forms.TextBox();
+            this.textBoxPressureMIN = new System.Windows.Forms.TextBox();
+            this.textBoxPressureDeltaMAX = new System.Windows.Forms.TextBox();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.cbDOMasterInOperation = new System.Windows.Forms.CheckBox();
             this.textBoxPH3 = new System.Windows.Forms.TextBox();
@@ -66,11 +69,9 @@
             this.textBoxTimeStamp = new System.Windows.Forms.TextBox();
             this.labelTimestamp = new System.Windows.Forms.Label();
             this.textBoxQueueName = new System.Windows.Forms.TextBox();
-            this.textBoxPressureMAX = new System.Windows.Forms.TextBox();
-            this.textBoxPressureMIN = new System.Windows.Forms.TextBox();
-            this.textBoxPressureDeltaMAX = new System.Windows.Forms.TextBox();
             this.Blower6 = new RMQReader.UCBlower();
             this.Blower5 = new RMQReader.UCBlower();
+            this.cbLogger = new System.Windows.Forms.CheckBox();
             this.Common.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
@@ -350,6 +351,9 @@
             this.Blower7.StartStop = false;
             this.Blower7.TabIndex = 20;
             this.Blower7.VaneMR = "0.00";
+            this.Blower7.VanePositionDeltaMAX = "0.00";
+            this.Blower7.VanePositionMAX = "0.00";
+            this.Blower7.VanePositionMIN = "0.00";
             this.Blower7.VaneSP = "0.00";
             // 
             // Blower8
@@ -363,6 +367,9 @@
             this.Blower8.StartStop = false;
             this.Blower8.TabIndex = 21;
             this.Blower8.VaneMR = "0.00";
+            this.Blower8.VanePositionDeltaMAX = "0.00";
+            this.Blower8.VanePositionMAX = "0.00";
+            this.Blower8.VanePositionMIN = "0.00";
             this.Blower8.VaneSP = "0.00";
             // 
             // Common
@@ -393,6 +400,39 @@
             this.Common.TabIndex = 22;
             this.Common.TabStop = false;
             this.Common.Text = "COMMON";
+            // 
+            // textBoxPressureMAX
+            // 
+            this.textBoxPressureMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressureMAX.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPressureMAX.Location = new System.Drawing.Point(290, 101);
+            this.textBoxPressureMAX.Name = "textBoxPressureMAX";
+            this.textBoxPressureMAX.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressureMAX.TabIndex = 25;
+            this.textBoxPressureMAX.Text = "0.00";
+            this.textBoxPressureMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxPressureMIN
+            // 
+            this.textBoxPressureMIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressureMIN.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPressureMIN.Location = new System.Drawing.Point(290, 75);
+            this.textBoxPressureMIN.Name = "textBoxPressureMIN";
+            this.textBoxPressureMIN.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressureMIN.TabIndex = 24;
+            this.textBoxPressureMIN.Text = "0.00";
+            this.textBoxPressureMIN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxPressureDeltaMAX
+            // 
+            this.textBoxPressureDeltaMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPressureDeltaMAX.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxPressureDeltaMAX.Location = new System.Drawing.Point(290, 49);
+            this.textBoxPressureDeltaMAX.Name = "textBoxPressureDeltaMAX";
+            this.textBoxPressureDeltaMAX.Size = new System.Drawing.Size(50, 20);
+            this.textBoxPressureDeltaMAX.TabIndex = 23;
+            this.textBoxPressureDeltaMAX.Text = "0.00";
+            this.textBoxPressureDeltaMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pictureBoxLogo
             // 
@@ -574,39 +614,6 @@
             this.textBoxQueueName.TabIndex = 23;
             this.textBoxQueueName.Text = "plc_control_queue";
             // 
-            // textBoxMAX
-            // 
-            this.textBoxPressureMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPressureMAX.ForeColor = System.Drawing.Color.DarkRed;
-            this.textBoxPressureMAX.Location = new System.Drawing.Point(290, 101);
-            this.textBoxPressureMAX.Name = "textBoxMAX";
-            this.textBoxPressureMAX.Size = new System.Drawing.Size(50, 20);
-            this.textBoxPressureMAX.TabIndex = 25;
-            this.textBoxPressureMAX.Text = "0.00";
-            this.textBoxPressureMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBoxMIN
-            // 
-            this.textBoxPressureMIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPressureMIN.ForeColor = System.Drawing.Color.DarkRed;
-            this.textBoxPressureMIN.Location = new System.Drawing.Point(290, 75);
-            this.textBoxPressureMIN.Name = "textBoxMIN";
-            this.textBoxPressureMIN.Size = new System.Drawing.Size(50, 20);
-            this.textBoxPressureMIN.TabIndex = 24;
-            this.textBoxPressureMIN.Text = "0.00";
-            this.textBoxPressureMIN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBoxDeltaMAX
-            // 
-            this.textBoxPressureDeltaMAX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPressureDeltaMAX.ForeColor = System.Drawing.Color.DarkRed;
-            this.textBoxPressureDeltaMAX.Location = new System.Drawing.Point(290, 49);
-            this.textBoxPressureDeltaMAX.Name = "textBoxDeltaMAX";
-            this.textBoxPressureDeltaMAX.Size = new System.Drawing.Size(50, 20);
-            this.textBoxPressureDeltaMAX.TabIndex = 23;
-            this.textBoxPressureDeltaMAX.Text = "0.00";
-            this.textBoxPressureDeltaMAX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // Blower6
             // 
             this.Blower6.Caption = "BLOWER";
@@ -618,6 +625,9 @@
             this.Blower6.StartStop = false;
             this.Blower6.TabIndex = 25;
             this.Blower6.VaneMR = "0.00";
+            this.Blower6.VanePositionDeltaMAX = "0.00";
+            this.Blower6.VanePositionMAX = "0.00";
+            this.Blower6.VanePositionMIN = "0.00";
             this.Blower6.VaneSP = "0.00";
             // 
             // Blower5
@@ -631,13 +641,31 @@
             this.Blower5.StartStop = false;
             this.Blower5.TabIndex = 24;
             this.Blower5.VaneMR = "0.00";
+            this.Blower5.VanePositionDeltaMAX = "0.00";
+            this.Blower5.VanePositionMAX = "0.00";
+            this.Blower5.VanePositionMIN = "0.00";
             this.Blower5.VaneSP = "0.00";
+            // 
+            // cbLogger
+            // 
+            this.cbLogger.AutoSize = true;
+            this.cbLogger.Checked = true;
+            this.cbLogger.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbLogger.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbLogger.ForeColor = System.Drawing.Color.DimGray;
+            this.cbLogger.Location = new System.Drawing.Point(537, 257);
+            this.cbLogger.Name = "cbLogger";
+            this.cbLogger.Size = new System.Drawing.Size(59, 17);
+            this.cbLogger.TabIndex = 26;
+            this.cbLogger.Text = "Logger";
+            this.cbLogger.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 721);
+            this.Controls.Add(this.cbLogger);
             this.Controls.Add(this.Blower6);
             this.Controls.Add(this.Blower5);
             this.Controls.Add(this.textBoxQueueName);
@@ -666,6 +694,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RMQReader";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Common.ResumeLayout(false);
             this.Common.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
@@ -718,6 +747,7 @@
         private System.Windows.Forms.TextBox textBoxPressureDeltaMAX;
         private UCBlower Blower6;
         private UCBlower Blower5;
+        private System.Windows.Forms.CheckBox cbLogger;
     }
 }
 

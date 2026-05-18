@@ -6,14 +6,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
+
 
 namespace RMQWriter
 {
+    using System;
+    using System.IO;
+    using System.Timers;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public partial class FormMain : Form
     {
         private bool _isConnected = false;
@@ -24,9 +33,13 @@ namespace RMQWriter
         private RabbitMQ.Client.IChannel _channel;
         private string _consumerTag = string.Empty;
 
+        private AdvancedDataLogger _log = null;
+
         public FormMain()
         {
             InitializeComponent();
+
+            _log = new AdvancedDataLogger();
         }
 
 
@@ -153,6 +166,10 @@ namespace RMQWriter
                         ucCM.Max = numbers[14];
                     }));
 
+                    // Write log data
+                    if (cbLogger.Checked)
+                        _log.AppendData(numbers);
+
                     // Writing data to RabbitMQ
                     Dictionary<string, double> data = new Dictionary<string, double>();
                     data.Add("PlantDO.PLCB.Blower5.VanePositionDeltaMAX", numbers[0]);
@@ -246,6 +263,118 @@ namespace RMQWriter
                 exchange: "",
                 routingKey: _queueName,
                 body: body);
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_log != null)
+            {
+                _log.Dispose();
+            }
+        }
+    }
+
+    public class AdvancedDataLogger : IDisposable
+    {
+        private StreamWriter _writer;
+        private string _currentFileName;
+        private DateTime _currentDate;
+        private readonly object _lockObj = new object();
+        private Timer _dayCheckTimer;
+
+        public AdvancedDataLogger()
+        {
+            // Timer to check for day change (every minute)
+            _dayCheckTimer = new Timer(60000);
+            _dayCheckTimer.Elapsed += OnTimerElapsed;
+            _dayCheckTimer.Start();
+
+            SetupLogger();
+        }
+
+        private void SetupLogger()
+        {
+            lock (_lockObj)
+            {
+                _currentDate = DateTime.Now.Date;
+                _currentFileName = GetFileName(_currentDate);
+
+                // Close old writer if it exists
+                _writer?.Close();
+
+                // Create new file or open existing for appending
+                bool fileExists = File.Exists(_currentFileName);
+                _writer = new StreamWriter(_currentFileName, append: true);
+
+                if (!fileExists)
+                {
+                    // Optionally add header for new file
+                    _writer.WriteLine("TS,BL5Delta,BL5Min,BL5Max,BL6Delta,BL6Min,BL6Max,BL7Delta,BL7Min,BL7Max,BL8Delta,BL8Min,BL8Max,CMDelta,CMMin,CMMax");
+                }
+                _writer.AutoFlush = true;
+            }
+        }
+
+        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            if (now.Date != _currentDate)
+            {
+                // New day has started - create new log file
+                SetupLogger();
+            }
+        }
+
+        public void AppendData(List<double> numbers)
+        {
+            ValidateNumbers(numbers, numbers?.Count ?? 0);
+            WriteNumbers(numbers);
+        }
+
+        public void AppendData(double[] numbers)
+        {
+            ValidateNumbers(numbers, numbers?.Length ?? 0);
+            WriteNumbers(numbers);
+        }
+
+        private void ValidateNumbers(object numbers, int count)
+        {
+            if (numbers == null)
+                throw new ArgumentException("Collection cannot be null");
+            //if (count != 15)
+            //    throw new ArgumentException("Must contain exactly 6 numbers");
+        }
+
+        private void WriteNumbers(IEnumerable<double> numbers)
+        {
+            lock (_lockObj)
+            {
+                // Get Unix timestamp (integer number of seconds)
+                long unixTime = GetUnixTimestamp();
+
+                // Format string: TIME_STAMP,N1,N2,N3,N4,N5,N6
+                string line = $"{unixTime},{string.Join(",", numbers)}";
+                _writer.WriteLine(line);
+            }
+        }
+
+        private long GetUnixTimestamp()
+        {
+            // Unix epoch: 1970-01-01 00:00:00 UTC
+            return DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        }
+
+        private string GetFileName(DateTime date)
+        {
+            return $"rmqwriter-{date:ddMMyy}.csv";
+        }
+
+        public void Dispose()
+        {
+            _dayCheckTimer?.Stop();
+            _dayCheckTimer?.Dispose();
+            _writer?.Close();
+            _writer?.Dispose();
         }
     }
 }

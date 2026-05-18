@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.textBoxQueueName = new System.Windows.Forms.TextBox();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonConnection = new System.Windows.Forms.Button();
-            this.timerMain = new System.Windows.Forms.Timer(this.components);
+            this.timerMain = new System.Windows.Forms.Timer();
             this.ucCM = new RMQWriter.UCDeltaMinMax();
             this.ucBL8 = new RMQWriter.UCDeltaMinMax();
             this.ucBL7 = new RMQWriter.UCDeltaMinMax();
             this.ucBL6 = new RMQWriter.UCDeltaMinMax();
             this.ucBL5 = new RMQWriter.UCDeltaMinMax();
             this.textBoxTimerInterval = new System.Windows.Forms.TextBox();
+            this.cbLogger = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBoxQueueName
@@ -148,11 +148,26 @@
             this.textBoxTimerInterval.Text = "1000";
             this.textBoxTimerInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // cbLogger
+            // 
+            this.cbLogger.AutoSize = true;
+            this.cbLogger.Checked = true;
+            this.cbLogger.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbLogger.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbLogger.ForeColor = System.Drawing.Color.DimGray;
+            this.cbLogger.Location = new System.Drawing.Point(188, 196);
+            this.cbLogger.Name = "cbLogger";
+            this.cbLogger.Size = new System.Drawing.Size(59, 17);
+            this.cbLogger.TabIndex = 33;
+            this.cbLogger.Text = "Logger";
+            this.cbLogger.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 291);
+            this.Controls.Add(this.cbLogger);
             this.Controls.Add(this.textBoxTimerInterval);
             this.Controls.Add(this.ucCM);
             this.Controls.Add(this.ucBL8);
@@ -168,6 +183,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RMQWriter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,6 +201,7 @@
         private UCDeltaMinMax ucBL8;
         private UCDeltaMinMax ucCM;
         private System.Windows.Forms.TextBox textBoxTimerInterval;
+        private System.Windows.Forms.CheckBox cbLogger;
     }
 }
 

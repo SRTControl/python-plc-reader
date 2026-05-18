@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Channels;
@@ -15,10 +17,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using System.Xml.Linq;
-
-using NLog;
 
 
 namespace RMQReader
@@ -33,6 +34,8 @@ namespace RMQReader
         private bool _isConnected = false;
 
         private Logger appLog;
+
+        private AdvancedDataLogger _log = null;
 
         public FormMain()
         {
@@ -62,6 +65,8 @@ namespace RMQReader
             T5G5.Caption = "T5G5";
             T5G6.Caption = "T5G6";
             T5G7.Caption = "T5G7";
+
+            _log = new AdvancedDataLogger();
         }
 
         private async Task OpenRabbitMQConnectionAsync()
@@ -87,6 +92,32 @@ namespace RMQReader
                 try
                 {
                     var data = JsonConvert.DeserializeObject<PlantData>(jsonString);
+
+                    double[] numbers = new double[15];
+                    
+                    numbers[0] = data.Blower5.VanePositionDeltaMAX; ;
+                    numbers[1] = data.Blower5.VanePositionMIN;
+                    numbers[2] = data.Blower5.VanePositionMAX;
+
+                    numbers[3] = data.Blower6.VanePositionDeltaMAX; ;
+                    numbers[4] = data.Blower6.VanePositionMIN;
+                    numbers[5] = data.Blower6.VanePositionMAX;
+
+                    numbers[6] = data.Blower7.VanePositionDeltaMAX; ;
+                    numbers[7] = data.Blower7.VanePositionMIN;
+                    numbers[8] = data.Blower7.VanePositionMAX;
+
+                    numbers[9] = data.Blower8.VanePositionDeltaMAX;
+                    numbers[10] = data.Blower8.VanePositionMIN;
+                    numbers[11] = data.Blower8.VanePositionMAX;
+
+                    numbers[12] = data.Common.PressureDeltaMAX;
+                    numbers[13] = data.Common.PressureMIN;
+                    numbers[14] = data.Common.PressureMAX;
+
+                    // Write log data
+                    if (cbLogger.Checked)
+                        _log.AppendData(numbers);
 
                     if (data != null)
                     {
@@ -351,6 +382,118 @@ namespace RMQReader
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTime;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_log != null)
+            {
+                _log.Dispose();
+            }
+        }
+    }
+
+    public class AdvancedDataLogger : IDisposable
+    {
+        private StreamWriter _writer;
+        private string _currentFileName;
+        private DateTime _currentDate;
+        private readonly object _lockObj = new object();
+        private System.Timers.Timer _dayCheckTimer;
+
+        public AdvancedDataLogger()
+        {
+            // Timer to check for day change (every minute)
+            _dayCheckTimer = new System.Timers.Timer(60000);
+            _dayCheckTimer.Elapsed += OnTimerElapsed;
+            _dayCheckTimer.Start();
+
+            SetupLogger();
+        }
+
+        private void SetupLogger()
+        {
+            lock (_lockObj)
+            {
+                _currentDate = DateTime.Now.Date;
+                _currentFileName = GetFileName(_currentDate);
+
+                // Close old writer if it exists
+                _writer?.Close();
+
+                // Create new file or open existing for appending
+                bool fileExists = File.Exists(_currentFileName);
+                _writer = new StreamWriter(_currentFileName, append: true);
+
+                if (!fileExists)
+                {
+                    // Optionally add header for new file
+                    _writer.WriteLine("TS,BL5Delta,BL5Min,BL5Max,BL6Delta,BL6Min,BL6Max,BL7Delta,BL7Min,BL7Max,BL8Delta,BL8Min,BL8Max,CMDelta,CMMin,CMMax");
+                }
+                _writer.AutoFlush = true;
+            }
+        }
+
+        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            if (now.Date != _currentDate)
+            {
+                // New day has started - create new log file
+                SetupLogger();
+            }
+        }
+
+        public void AppendData(List<double> numbers)
+        {
+            ValidateNumbers(numbers, numbers?.Count ?? 0);
+            WriteNumbers(numbers);
+        }
+
+        public void AppendData(double[] numbers)
+        {
+            ValidateNumbers(numbers, numbers?.Length ?? 0);
+            WriteNumbers(numbers);
+        }
+
+        private void ValidateNumbers(object numbers, int count)
+        {
+            if (numbers == null)
+                throw new ArgumentException("Collection cannot be null");
+            //if (count != 15)
+            //    throw new ArgumentException("Must contain exactly 6 numbers");
+        }
+
+        private void WriteNumbers(IEnumerable<double> numbers)
+        {
+            lock (_lockObj)
+            {
+                // Get Unix timestamp (integer number of seconds)
+                long unixTime = GetUnixTimestamp();
+
+                // Format string: TIME_STAMP,N1,N2,N3,N4,N5,N6
+                string line = $"{unixTime},{string.Join(",", numbers)}";
+                _writer.WriteLine(line);
+            }
+        }
+
+        private long GetUnixTimestamp()
+        {
+            // Unix epoch: 1970-01-01 00:00:00 UTC
+            return DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        }
+
+        private string GetFileName(DateTime date)
+        {
+            return $"rmqreader-{date:ddMMyy}.csv";
+        }
+
+        public void Dispose()
+        {
+            _dayCheckTimer?.Stop();
+            _dayCheckTimer?.Dispose();
+            _writer?.Close();
+            _writer?.Dispose();
         }
     }
 }
